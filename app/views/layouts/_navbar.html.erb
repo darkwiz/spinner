@@ -1,0 +1,41 @@
+<ul class="nav">
+	<% if signed_in? %>
+	<li class="divider-vertical"></li>
+	<li><%= link_to "Users", users_path %></li>
+	<li class="divider-vertical"></li>
+	<form class="navbar-search form-search offset2">
+			<div class="input-append">
+				<input type="text" class="span3 search-query" placeholder="Search" />
+				<button class="btn btn-small" type="submit">
+					<i class="icon-search"></i>
+				</button>
+			</div>
+		</form>	
+</ul>
+<ul class="nav pull-right">
+	<li>
+		<a class="btn btn-inverse" href="">
+			<i class="icon-pencil icon-white pull-right"></i>
+		</a>
+	</li>
+	<li class="divider-vertical"></li>
+	<li id="fat-menu" class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			Account <b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu pull-right">
+			<li><%= link_to "Profile", current_user %></li>
+			<li><%= link_to "Settings", edit_user_path(current_user) %></li>
+			<li class="divider"></li>
+			<li>
+				<%= link_to "Sign out", signout_path, method: "delete" %>
+			</li>
+		</ul>
+	</li>
+	<li class="divider-vertical"></li>
+	<% else %>
+	<li><%= link_to "Help", help_path %></li>
+
+	<% end %>
+
+</ul>

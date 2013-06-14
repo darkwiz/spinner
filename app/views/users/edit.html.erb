@@ -1,0 +1,39 @@
+<%- content_for :sidebar do -%>
+<div class="span4 loop-settings-sidenav">
+<pre>
+  <%= gravatar_for @user, size: 30 %> <a href="<%= user_path @user %>"><%= @user.name %></a>@<%= @user.username %>
+</pre>
+
+<ul class="nav nav-tabs nav-stacked">
+  <li class="active"><a href="#"><i class="icon-chevron-right"></i>Account</a></li>   <%# active=selected %>
+  <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
+</ul>
+</div>
+<%- end -%>
+<%- content_for :body do -%>
+<% provide(:title, "Edit user") %> 
+
+  <div class="span8 well">
+    <h2>Update your profile</h2>
+    <%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages' %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation, "Confirm Password" %>
+    <%= f.password_field :password_confirmation %>
+
+    <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails">change</a>
+</div>
+<%- end -%>

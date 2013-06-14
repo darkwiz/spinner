@@ -1,0 +1,16 @@
+<%- content_for :body do -%>
+<div class="span8 offset4">
+<% provide(:title, 'All users') %>
+<ul class="users">
+	<h1>All users</h1>
+	<% @users.each do |user| %>
+	<li>
+		<%= gravatar_for user, size: 52 %>
+		<%= link_to user.name, user %>
+	</li>
+	<% end %>
+</ul>
+<%= paginate @users %>
+</div>
+<%- end -%>
+

@@ -1,0 +1,45 @@
+<%- content_for :navbar do -%>
+
+<ul class="nav">
+	<li class="divider-vertical"></li>
+	<li class="active"><a href="#">Home</a></li>
+	<li class="divider-vertical"></li>
+	<li><a href="#">Profile</a></li>
+	<li class="divider-vertical"></li>
+	<li><a href="#">Link</a></li>
+	<li class="divider-vertical"></li>
+	<form class="navbar-search form-search">
+    	<div class="input-append">
+	    	<input type="text" class="span3 search-query" placeholder="Search" />
+	    	<button class="btn" type="submit">
+	    		<i class="icon-search"></i>
+	    	</button>
+	    </div>
+    </form>							
+    <li class="divider-vertical"></li>
+</ul>
+<ul class="nav pull-right">
+	<li>
+		<a class="btn btn-inverse" href="">
+			<i class="icon-pencil icon-white pull-right"></i>
+		</a>
+	</li>
+	<li class="divider-vertical"></li>
+    <li>
+    	<div class="btn-group">
+	    	<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+	    		<i class="icon-list icon-white pull-left"></i>
+	    		&nbsp;Settings&nbsp;
+	    		<span class="caret"></span>
+	    	</a>
+		    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			    <li><a tabindex="-1" href="#">Action</a></li>
+			    <li><a tabindex="-1" href="#">Another action</a></li>
+			    <li><a tabindex="-1" href="#">Something else here</a></li>
+			    <li class="divider"></li>
+			    <li><a tabindex="-1" href="#">Separated link</a></li>
+	    	</ul>
+	    </div>
+    </li>
+</ul>
+<%- end -%>
