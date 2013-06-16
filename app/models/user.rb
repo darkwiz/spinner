@@ -2,11 +2,15 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  username        :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -26,9 +30,11 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
 private
+  
+  # Create a token for for persistent login.
 
   def create_remember_token
-    # Create the token.
      self.remember_token = SecureRandom.urlsafe_base64
   end
+
 end
