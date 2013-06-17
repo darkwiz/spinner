@@ -1,7 +1,13 @@
 class SessionsController < ApplicationController
-	def new
-		
+
+  # Renders the signin module (sessions/new.html.erb)
+	
+  def new
 	end
+
+  # When the user attempts to log in, this method checks the submitted data, 
+  # if there's a correspondence into the db it will authenticates the user,
+  # otherwise the function notifies the user the error
 
 	def create
     user = User.find_by_email(params[:session][:email].downcase)
@@ -13,6 +19,9 @@ class SessionsController < ApplicationController
       render 'new'
      end
     end
+
+  # When the user attempts to log out, this method recalls the sign_out method
+  # and redirects the user to the signin/signup page
 
 	def destroy
     sign_out

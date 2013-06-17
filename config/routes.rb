@@ -73,3 +73,20 @@ Loop::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+#== Route Map
+# Generated on 17 Jun 2013 17:10
+#
+#             POST   /users(.:format)          users#create
+#    new_user GET    /users/new(.:format)      users#new
+#   edit_user GET    /users/:id/edit(.:format) users#edit
+#        user GET    /users/:id(.:format)      users#show
+#             PUT    /users/:id(.:format)      users#update
+#             DELETE /users/:id(.:format)      users#destroy
+#    sessions POST   /sessions(.:format)       sessions#create
+# new_session GET    /sessions/new(.:format)   sessions#new
+#     session DELETE /sessions/:id(.:format)   sessions#destroy
+#        root        /                         users#new
+#      signup        /signup(.:format)         users#new
+#      signin        /signin(.:format)         sessions#new
+#     signout DELETE /signout(.:format)        sessions#destroy
+#        help        /help(.:format)           loop#help

@@ -1,13 +1,16 @@
 <%- content_for :body do -%>
 <div class="span8 offset4">
-<% provide(:title, 'All users') %>
-<ul class="users">
-	<h1>All users</h1>
-	<% @users.each do |user| %>
-	<%= render user %>
-	<% end %>
-</ul>
-<%= paginate @users %>
+	<% provide(:title, 'All users') %>
+
+	<%= render 'layouts/messages' %>
+
+	<ul class="users">
+		<h1>All users</h1>
+		<% @users.each do |user| %>
+		<%= render user %>
+		<% end %>
+	</ul>
+	<%= paginate @users %>
 </div>
 <%- end -%>
 

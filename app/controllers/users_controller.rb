@@ -66,9 +66,14 @@ class UsersController < ApplicationController
   # Delete a User from the application(method reserved to the admin user)
 
   def destroy
-      User.find(params[:id]).destroy
+    user = User.find(params[:id])
+    unless user.admin?
+      user.destroy
       flash[:success] = "User deleted"
       redirect_to users_url
+      else
+      redirect_to users_url , :notice => "Cannot Delete Admin!"
+      end
   end
 
   private

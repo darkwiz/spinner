@@ -20,6 +20,7 @@
  <%- end -%>
  <%- content_for :body do -%>
  <div class="span8 well">
+  <%= render 'layouts/messages' %>
  	<h5>User</h5>
  	<h6>
  		<%= gravatar_for @user %>
