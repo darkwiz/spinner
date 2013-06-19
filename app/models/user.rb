@@ -14,8 +14,9 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation,  :username
+  attr_accessible :name, :email, :password, :password_confirmation, :username
   has_secure_password
+  has_many :spins, dependent: :destroy # spins should be destroyed along with the user
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -28,6 +29,11 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true, presence: true
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def timeline
+    # This is preliminary. See "Following users" for the full implementation.
+    Spin.where("user_id = ?", id)
+  end
 
 private
   

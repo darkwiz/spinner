@@ -1,45 +1,56 @@
-<%- content_for :navbar do -%>
+<%# Logged User Home%>
 
-<ul class="nav">
-	<li class="divider-vertical"></li>
-	<li class="active"><a href="#">Home</a></li>
-	<li class="divider-vertical"></li>
-	<li><a href="#">Profile</a></li>
-	<li class="divider-vertical"></li>
-	<li><a href="#">Link</a></li>
-	<li class="divider-vertical"></li>
-	<form class="navbar-search form-search">
-    	<div class="input-append">
-	    	<input type="text" class="span3 search-query" placeholder="Search" />
-	    	<button class="btn" type="submit">
-	    		<i class="icon-search"></i>
-	    	</button>
-	    </div>
-    </form>							
-    <li class="divider-vertical"></li>
-</ul>
-<ul class="nav pull-right">
-	<li>
-		<a class="btn btn-inverse" href="">
-			<i class="icon-pencil icon-white pull-right"></i>
-		</a>
-	</li>
-	<li class="divider-vertical"></li>
-    <li>
-    	<div class="btn-group">
-	    	<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-	    		<i class="icon-list icon-white pull-left"></i>
-	    		&nbsp;Settings&nbsp;
-	    		<span class="caret"></span>
-	    	</a>
-		    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			    <li><a tabindex="-1" href="#">Action</a></li>
-			    <li><a tabindex="-1" href="#">Another action</a></li>
-			    <li><a tabindex="-1" href="#">Something else here</a></li>
-			    <li class="divider"></li>
-			    <li><a tabindex="-1" href="#">Separated link</a></li>
-	    	</ul>
-	    </div>
-    </li>
-</ul>
+<% if signed_in? %>
+
+<% provide(:title, "Your Home Page") %>
+<%- content_for :sidebar do -%>
+
+
+<div class="span4 loop-settings-sidenav">
+   <aside>
+    <section> 
+      <%= gravatar_for current_user, size: 40 %><a href="<%= user_path current_user %>">
+      <%= current_user.name %></a>@<%= current_user.username %>
+      <br />
+      <span><%= pluralize(current_user.spins.count, "spin") %></span>
+   </section>
+<br />
+    <section>
+      <%= render 'shared/spin_form' %>
+    </section>
+</aside>
+</div>
+
+
 <%- end -%>
+
+<%- content_for :body do -%>
+
+<div class="span8 well">
+      <h3>Spins Timeline</h3>
+      <%= render 'shared/timeline' %>
+</div>
+<%- end -%>
+
+<%# Non Logged User Home%>
+
+<% else %>
+
+<% provide(:title, "Welcome") %>
+
+<%- content_for :sidebar do -%>
+<%= render "sessions/login" %>
+<%- end -%>
+
+<%- content_for :body do -%>
+<div class="span6 offset2">
+  <h3>Or Sign up</h3>
+  <%= form_for(@user) do |f| %>
+
+  <%= render 'shared/form_fields', f: f %>
+  <%= f.submit "Create Account", class: "btn btn-primary" %>
+
+  <% end %>
+</div>
+<%- end -%>
+<% end %>

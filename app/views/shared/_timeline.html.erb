@@ -1,0 +1,6 @@
+<% if @timeline_items.any? %>
+  <ol class="spins">
+    <%= render partial: 'shared/timeline_item', collection: @timeline_items %>
+  </ol>
+  <%= paginate @timeline_items %>
+<% end %>

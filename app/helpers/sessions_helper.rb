@@ -32,6 +32,17 @@ module SessionsHelper
     !current_user.nil? 
   end
 
+  # Checks whether the user is authenticated, if not authenticated stores the requested URL(to redirect the user once logged in)
+  # and performs the redirect to the login page showing a warning message.
+
+
+  def signed_in_user 
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+  end
+
   # Signout function sets the curent user to nil and deletes the cookie remeber_token
 
    def sign_out

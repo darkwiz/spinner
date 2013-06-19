@@ -44,11 +44,13 @@ class UsersController < ApplicationController
     end
   end
 
-  # Shows the user profile 
+  # Shows an user profile (and his own spins)
 
   def show
   	@user = User.find(params[:id])
+    @spins = @user.spins.page(params[:page]).per(3)
   end
+
 
    # Creates and saves a new User, if any error occurs redirects the user to the signin/signup page
 
@@ -77,18 +79,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-
- # Method that checks whether the user is authenticated, if not authenticated stores the requested URL(to redirect the user once logged in)
- # and performs the redirect to the login page showing a warning message.
-
-
-  def signed_in_user #:doc:
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-  end
 
 
  # Method that checks whether the user is the correct one (i.e.: editing his just his own profile and not other profiles)

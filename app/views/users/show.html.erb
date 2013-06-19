@@ -1,31 +1,31 @@
+ <% provide(:title, "Home Page") %>
  <%- content_for :sidebar do -%>
-<div class="span4">
-<pre>
-  <%= gravatar_for @user, size: 30 %> <a href="<%= user_path @user %>"><%= @user.name %></a>@<%= @user.username %>
-</pre>
+ <div class="span4 loop-settings-sidenav">
 
-<ul class="nav nav-tabs nav-stacked">
-  <li class="active"><a href="#"><i class="icon-chevron-right"></i>Account</a></li>   <%# active=selected %>
-  <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-</ul>
-    <ul class="thumbnails">
-    <div class="thumbnail">
-    <img data-src="holder.js/300x200" alt="">
-    <h3>Thumbnail label</h3>
-    <p>Thumbnail caption...</p>
-    </div>
-    </ul>
+  <ul class="nav nav-tabs nav-stacked">
+    <li class="active"><a href="#"><i class="icon-chevron-right"></i>Account</a></li>   <%# active=selected %>
+    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
+    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
+    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
+  </ul>
 </div>
 
- <%- end -%>
- <%- content_for :body do -%>
- <div class="span8 well">
-  <%= render 'layouts/messages' %>
- 	<h5>User</h5>
- 	<h6>
- 		<%= gravatar_for @user %>
- 		<%= @user.name %>
- 	</h6>
- </div>
-
- <%- end -%>
+<%- end -%>
+<%- content_for :body do -%>
+<div class="span8 well">
+  <h5>User</h5>
+  <h6>
+   <%= gravatar_for @user %>
+   <%= @user.name %>
+ </h6>
+</div>
+<div class="span8 well">
+ <% if @user.spins.any? %>
+ <h3>Spins (<%= @user.spins.count %>)</h3>
+ <ol class="spins">
+  <%= render @spins %>
+</ol>
+<%= paginate @spins %>
+<% end %>
+</div>
+<%- end -%>
