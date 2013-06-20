@@ -1,4 +1,4 @@
- <% provide(:title, "Home Page") %>
+<% provide(:title, @title) %>
  <%- content_for :sidebar do -%>
  <div class="span4 loop-settings-sidenav">
 
@@ -21,13 +21,12 @@
 
 </div>
 <div class="span8">
-  <%= render 'follow_form' if signed_in? %>
- <% if @user.spins.any? %>
- <h3>Spins (<%= @user.spins.count %>)</h3>
- <ol class="spins">
-  <%= render @spins %>
-</ol>
-<%= paginate @spins %>
-<% end %>
-</div>
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <ul class="users">
+        <%= render @users %>
+      </ul>
+      <%= paginate @users %>
+    <% end %>
+  </div>
 <%- end -%>

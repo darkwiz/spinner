@@ -3,6 +3,7 @@ Loop::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :spins, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   #root to: 'users#new'
   root to: 'loop#home'
@@ -12,7 +13,11 @@ Loop::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete # via DELETE (like POST,GET..)
   match '/help' , to: 'loop#help'
 
-
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

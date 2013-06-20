@@ -14,3 +14,27 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap-dropdown
+
+$(function() {
+	$('#spin_content').keyup(function () {
+		var max = 140;
+		var len = $(this).val().length;
+		if (len <= max){
+			len = max - len;
+			$(".help-block").text(""+ len +"");
+			$(".help-block").css( "color", "" );
+		} else {
+			len = max - len;
+			$(".help-block").text(""+ len +"");
+			$(".help-block").css( "color", "red" );
+		}
+		len--
+	});
+});
+
+
+$(function() {
+	$('.close').click(function () {
+	    $(this).parent("div").remove();
+	});
+});

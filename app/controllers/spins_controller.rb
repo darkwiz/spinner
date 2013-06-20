@@ -8,13 +8,11 @@ class SpinsController < ApplicationController
 
 	def create
 		@spin = current_user.spins.build(params[:spin])
-
 		if @spin.save
 			flash[:success] = "Spin created!"
 			redirect_to root_url
 		else
 			@timeline_items = current_user.timeline.page(params[:page])
-
 			render 'loop/home'
 		end
 	end

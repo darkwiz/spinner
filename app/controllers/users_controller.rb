@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following , :followers]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user, only: :destroy
 
@@ -19,8 +19,7 @@ class UsersController < ApplicationController
   # methods page() and per(number_of_occurences in a page)
 
   def index
-      @users = User.page(params[:page]).per(3) 
-      #@users = User.all
+      @users = User.page(params[:page])
   end
 
   # If the user is already logged in, and if is the correct user this method gives the user the ability
@@ -48,7 +47,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-    @spins = @user.spins.page(params[:page]).per(3)
+    @spins = @user.spins.page(params[:page]).per(6)
   end
 
 
@@ -76,6 +75,21 @@ class UsersController < ApplicationController
       else
       redirect_to users_url , :notice => "Cannot Delete Admin!"
       end
+  end
+
+
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.page(params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.page(params[:page])
+    render 'show_follow'
   end
 
   private

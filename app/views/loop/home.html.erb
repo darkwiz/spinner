@@ -1,56 +1,13 @@
-<%# Logged User Home%>
-
 <% if signed_in? %>
 
-<% provide(:title, "Your Home Page") %>
-<%- content_for :sidebar do -%>
+<%# Logged User Home%>
 
-
-<div class="span4 loop-settings-sidenav">
-   <aside>
-    <section> 
-      <%= gravatar_for current_user, size: 40 %><a href="<%= user_path current_user %>">
-      <%= current_user.name %></a>@<%= current_user.username %>
-      <br />
-      <span><%= pluralize(current_user.spins.count, "spin") %></span>
-   </section>
-<br />
-    <section>
-      <%= render 'shared/spin_form' %>
-    </section>
-</aside>
-</div>
-
-
-<%- end -%>
-
-<%- content_for :body do -%>
-
-<div class="span8 well">
-      <h3>Spins Timeline</h3>
-      <%= render 'shared/timeline' %>
-</div>
-<%- end -%>
-
-<%# Non Logged User Home%>
+<%= render 'loop/home_logged' %>
 
 <% else %>
 
-<% provide(:title, "Welcome") %>
+<%# Non Logged User Home%>
 
-<%- content_for :sidebar do -%>
-<%= render "sessions/login" %>
-<%- end -%>
+<%= render 'loop/home_base' %>
 
-<%- content_for :body do -%>
-<div class="span6 offset2">
-  <h3>Or Sign up</h3>
-  <%= form_for(@user) do |f| %>
-
-  <%= render 'shared/form_fields', f: f %>
-  <%= f.submit "Create Account", class: "btn btn-primary" %>
-
-  <% end %>
-</div>
-<%- end -%>
 <% end %>
