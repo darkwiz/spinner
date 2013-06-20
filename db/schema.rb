@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620194732) do
+ActiveRecord::Schema.define(:version => 20130620210903) do
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(:version => 20130620194732) do
     t.boolean  "admin",                  :default => false
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "user_confirm_token"
+    t.datetime "user_confirm_sent_at"
+    t.boolean  "confirmed_user",         :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

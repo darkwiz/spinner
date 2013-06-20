@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :username
+  attr_accessible :name, :email, :password, :password_confirmation, :username, :confirmed_user
   attr_accessor :updating_password
 
   has_secure_password
@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
        self.updating_password = false
        save!
        UserMailer.password_reset(self).deliver
+  end
+
+  def send_confirm_email
+       generate_token(:user_confirm_token)
+       self.user_confirm_sent_at = Time.zone.now
+       #self.updating_password = false
+       save!
+       UserMailer.user_confirmation(self).deliver
   end
 
   def timeline

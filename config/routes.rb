@@ -1,5 +1,7 @@
 Loop::Application.routes.draw do
 
+  get "user_confirmations/new"
+
   get "password_resets/new"
 
   resources :users
@@ -7,6 +9,7 @@ Loop::Application.routes.draw do
   resources :spins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
+  resources :user_confirmations
 
   #root to: 'users#new'
   root to: 'loop#home'
