@@ -2,9 +2,13 @@ module SessionsHelper
   # Sets the permanent cookie (20yr) taking as value the user remember
   # token, furthermore sets the current_user variable
   
-	def sign_in(user)
-    cookies.permanent[:remember_token] = user.remember_token
-    self.current_user = user
+	def sign_in(user,option = true)
+    if !option
+      cookies.permanent[:remember_token] = user.remember_token
+    else
+      cookies[:remember_token] = user.remember_token
+    end
+      self.current_user = user
   end
 
   # Sets the current_user instance variable 
@@ -17,7 +21,7 @@ module SessionsHelper
   # but only if @current_user is undefined
 
   def current_user
-  	@current_user ||= User.find_by_remember_token(cookies[:remember_token])
+  	@current_user ||= User.find_by_remember_token(cookies[:remember_token]) if cookies[:remember_token]
   end
 
   # Checks if current_user is equal to the given user, and returns a boolean

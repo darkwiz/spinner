@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :username
+  attr_accessor :updating_password
+
   has_secure_password
   has_many :spins, dependent: :destroy # spins should be destroyed along with the user
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy  
@@ -16,9 +18,21 @@ class User < ActiveRecord::Base
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :username, uniqueness: true, presence: true
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  validates :username, uniqueness: true, presence: true 
+  validates :password, presence: true, length: { minimum: 6 }, :if => :should_validate_password?
+  validates :password_confirmation, presence: true, :if => :should_validate_password?
+
+  def should_validate_password?
+    updating_password || new_record?
+  end
+
+  def send_password_reset 
+       generate_token(:password_reset_token)
+       self.password_reset_sent_at = Time.zone.now
+       self.updating_password = false
+       save!
+       UserMailer.password_reset(self).deliver
+  end
 
   def timeline
     # Spin.where("user_id = ?", id)
@@ -40,7 +54,11 @@ class User < ActiveRecord::Base
 
 private
   
-  
+  def generate_token(column)
+   begin
+    self[column] = SecureRandom.urlsafe_base64
+   end while User.exists?(column => self[column])
+  end
   
   # Create a token for for persistent login.
 
