@@ -8,8 +8,8 @@ Loop::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :spins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :password_resets
-  resources :user_confirmations
+  resources :password_resets, only: [:new, :create, :edit, :update] 
+  resources :user_confirmations, only: [:new, :show]
 
   #root to: 'users#new'
   root to: 'loop#home'

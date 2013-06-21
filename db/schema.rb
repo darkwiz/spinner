@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(:version => 20130620210903) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "spins", ["user_id", "created_at"], :name => "index_spins_on_user_id_and_created_at"
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -44,9 +42,9 @@ ActiveRecord::Schema.define(:version => 20130620210903) do
     t.boolean  "admin",                  :default => false
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.boolean  "confirmed_user",         :default => false
     t.string   "user_confirm_token"
     t.datetime "user_confirm_sent_at"
-    t.boolean  "confirmed_user",         :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

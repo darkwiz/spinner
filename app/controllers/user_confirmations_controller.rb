@@ -2,7 +2,7 @@ class UserConfirmationsController < ApplicationController
   def new
     user = User.find_by_email(params[:email]) # email empty
     user.send_confirm_email if user
-    redirect_to root_url, :notice => "Email sent with activation instructions.#{user}"
+    redirect_to root_url, :notice => "Email sent with activation instructions."
   end
 
   def show
@@ -12,6 +12,5 @@ class UserConfirmationsController < ApplicationController
   else @user.update_attributes(:confirmed_user => true)
      redirect_to root_url, :notice => "Succesfully registrated and activated!"
   end
-  	
   end
 end
