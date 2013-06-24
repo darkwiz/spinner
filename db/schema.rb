@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620210903) do
+ActiveRecord::Schema.define(:version => 20130622145440) do
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -27,8 +27,9 @@ ActiveRecord::Schema.define(:version => 20130620210903) do
   create_table "spins", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "in_reply_to"
   end
 
   create_table "users", :force => true do |t|
@@ -49,5 +50,6 @@ ActiveRecord::Schema.define(:version => 20130620210903) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

@@ -19,7 +19,13 @@ class UsersController < ApplicationController
   # methods page() and per(number_of_occurences in a page)
 
   def index
-      @users = User.page(params[:page])
+    if params[:search]
+         @users = User.search(params[:search]).page(params[:page])
+         
+      else
+         @users = User.page(params[:page])
+      end
+      
   end
 
   # If the user is already logged in, and if is the correct user this method gives the user the ability
@@ -48,6 +54,7 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @spins = @user.spins.page(params[:page]).per(6)
+    @spin = @user.spins.build
   end
 
 

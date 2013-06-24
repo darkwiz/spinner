@@ -7,6 +7,7 @@ class SpinsController < ApplicationController
 
 
 	def create
+		params[:spin][:in_reply_to] = get_username(params[:spin][:content])
 		@spin = current_user.spins.build(params[:spin])
 		if @spin.save
 			flash[:success] = "Spin created!"
@@ -24,6 +25,13 @@ class SpinsController < ApplicationController
 	end
 
 private
+	# Checks if a spin is in reply to a user (if @ symbol is present)
+	
+	def get_username(txt, col = 140)
+		if txt.match(/^@([A-Za-z0-9_]{1,140})/)
+			txt.match(/^@([A-Za-z0-9_]{1,140})/)[0].gsub!(/^@/, '')
+		end
+	end
 
 	def spin_owner
 		#@spin = current_user.spins.find_by_id(params[:id])

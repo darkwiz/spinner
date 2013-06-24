@@ -44,7 +44,10 @@ class User < ActiveRecord::Base
 
   def timeline
     # Spin.where("user_id = ?", id)
-     Spin.from_users_followed_by(self)
+    
+      Spin.from_users_followed_by_and_replies(self)
+
+      #Spin.including_replies(self)
   end
 
   def following?(other_user)
@@ -59,6 +62,12 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
+  def self.search(search)
+  if search
+    where("name LIKE ?", "%#{search}%") 
+    #find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  end
+end
 
 private
   

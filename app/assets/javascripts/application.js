@@ -11,9 +11,16 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap-dropdown
+$(function() {
+    var max = 140;
+	var len = $('#spin_content').val().length;
+	len = max - len
+	$(".help-block").text(""+ len +"");
+});
 
 $(function() {
 	$('#spin_content').keyup(function () {
@@ -32,9 +39,15 @@ $(function() {
 	});
 });
 
-
 $(function() {
 	$('.close').click(function () {
 	    $(this).parent("div").remove();
 	});
 });
+/*
+$(function() {
+   $("#birds").autocomplete({
+    source: "http://localhost:3000/tags/autocomplete_tag_name",
+    minLength: 3
+   });
+  });*/

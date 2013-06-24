@@ -19,6 +19,10 @@ Loop::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete # via DELETE (like POST,GET..)
   match '/help' , to: 'loop#help'
 
+  resources :tags, only: [] do
+    get :autocomplete_tag_name, :on => :collection
+  end
+
   resources :users do
     member do
       get :following, :followers

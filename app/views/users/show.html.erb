@@ -7,6 +7,15 @@
     <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
     <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
   </ul>
+  <aside>
+    <section>
+      <% unless current_user?(@user) %>
+          <%= render 'shared/reply_spin_form' %>
+      <% else %>
+          <%= render 'shared/spin_form' %>
+        <% end %>
+    </section>
+  </aside>
 </div>
 
 <%- end -%>

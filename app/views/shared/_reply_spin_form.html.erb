@@ -1,0 +1,10 @@
+<h3><%= simple_format("Spin to #{@user.name}") %></h3>
+<%= form_for(@spin) do |f| %> 
+ <%= render 'shared/error_messages', object: f.object %>
+ <div class="field">
+	<%= f.text_area :content, :value => "@#{@user.username}" %> 
+ </div>
+ <span class="help-block">140</span>
+<%= f.submit "Post", class: "btn btn-primary" %>
+
+<% end %>

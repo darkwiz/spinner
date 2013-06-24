@@ -3,7 +3,7 @@ module SessionsHelper
   # token, furthermore sets the current_user variable
   
 	def sign_in(user,option = true)
-    if !option
+    if option
       cookies.permanent[:remember_token] = user.remember_token
     else
       cookies[:remember_token] = user.remember_token
