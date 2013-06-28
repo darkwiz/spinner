@@ -8,4 +8,23 @@ $ ->
         data:
           name: request.term
         success: (data) ->
-          response(data)
+          response(data)  
+###
+CoffeScript Version of create spin form with ajax
+$ ->
+  $('#new_spin_ajax').submit ->
+    valuesToSubmit = $(this).serialize()
+    $.ajax
+        beforeSend  : (xhr) ->
+         xhr.setRequestHeader("Accept", "application/javascript")
+        url: $(this).attr('action') 
+        data: valuesToSubmit
+        type: 'POST'
+        dataType: "html" 
+    .done (data) ->
+       eval(data)
+    .fail ->
+        alert("Huston abbiamo un problema")
+    return false
+      
+###

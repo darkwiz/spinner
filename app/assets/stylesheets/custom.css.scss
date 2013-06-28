@@ -65,6 +65,18 @@ textarea {
   background-color: #BCBCBC;
 }
 
+
+/* login */
+
+#login{
+  a {
+    color : #555;
+  }
+  a:hover {
+    color : #222;
+  }
+}
+
 /* footer */
 
 footer {
@@ -121,6 +133,12 @@ input {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
+}
+
+.modal-body-content{
+  input, textarea, select, .uneditable-input{
+    height : 100px;
+  }
 }
 
 /* sidebar */
@@ -283,6 +301,7 @@ aside {
     }
   }
 }
+
 /* miscellaneous */
 
 .debug_dump {

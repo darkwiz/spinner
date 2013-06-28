@@ -9,12 +9,24 @@ class SpinsController < ApplicationController
 	def create
 		params[:spin][:in_reply_to] = get_username(params[:spin][:content])
 		@spin = current_user.spins.build(params[:spin])
-		if @spin.save
-			flash[:success] = "Spin created!"
-			redirect_to root_url
-		else
-			@timeline_items = current_user.timeline.page(params[:page])
-			render 'loop/home'
+		ok = @spin.save
+		respond_to do |format| 
+			format.html {
+				if ok
+					flash[:success] = "Spin created!"
+					redirect_to root_url
+				else
+					@timeline_items = current_user.timeline.page(params[:page])
+					render 'loop/home'
+				end
+			}
+			format.js {
+				if ok
+					render 'create', object: current_user
+				else
+
+				end
+			}
 		end
 	end
 
@@ -24,7 +36,7 @@ class SpinsController < ApplicationController
 		redirect_to root_url
 	end
 
-private
+	private
 	# Checks if a spin is in reply to a user (if @ symbol is present)
 	
 	def get_username(txt, col = 140)
@@ -37,9 +49,9 @@ private
 		#@spin = current_user.spins.find_by_id(params[:id])
         #redirect_to(root_path) if @spin.nil?
         begin
-  			@spin = current_user.spins.find(params[:id])
-		rescue
-  			redirect_to(root_path) if @spin.nil?
-  		end
+        	@spin = current_user.spins.find(params[:id])
+        rescue
+        	redirect_to(root_path) if @spin.nil?
+        end
     end
 end

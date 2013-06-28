@@ -9,6 +9,9 @@
 </head>
 <body class='<%= body_class %>'>
 	<div class="container">
+<% if signed_in? %>
+        <%= render 'layouts/modal' %>
+        <% end %>
 		<div id="mainbar">
 			<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="navbar-inner">
@@ -24,12 +27,14 @@
 		<%# Inizio layout %>
 		<div class="container-fluid separate-container">
 			<%= render 'layouts/messages' %>
+
 				    <div class="row-fluid">
 				    	<%= yield :sidebar %>
 				
 				    	<%= yield :body %>
 		   </div>
 	    </div>
+
 	</div>
 <div class="container">
 	<%= yield :center %>

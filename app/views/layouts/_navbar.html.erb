@@ -14,9 +14,9 @@
 </ul>
 <ul class="nav pull-right">
 	<li>
-		<a class="btn btn-inverse" href="">
-			<i class="icon-pencil icon-white pull-right"></i>
-		</a>
+	<%= link_to "#", data: { toggle: "modal", target: "#ajax-modal" }, class: "btn btn-inverse"  do %>
+      <i class="icon-pencil icon-white pull-right"></i>
+    <% end %>
 	</li>
 	<li class="divider-vertical"></li>
 	<li id="fat-menu" class="dropdown">

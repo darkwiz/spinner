@@ -14,7 +14,7 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require_tree .
-//= require bootstrap-dropdown
+//= require bootstrap
 $(function() {
     var max = 140;
 	var len = $('#spin_content').val().length;
@@ -39,15 +39,23 @@ $(function() {
 	});
 });
 
-$(function() {
-	$('.close').click(function () {
-	    $(this).parent("div").remove();
-	});
-});
+
 /*
-$(function() {
-   $("#birds").autocomplete({
-    source: "http://localhost:3000/tags/autocomplete_tag_name",
-    minLength: 3
-   });
-  });*/
+$('#myModal').modal(show);
+
+$('#InfroTextSubmit').click(function(){
+    
+    if ($('#title').val()==="") {
+      // invalid
+      $('#title').next('.help-inline').show();
+      return false;
+    }
+    else {
+      // submit the form here
+      // $('#InfroText').submit();
+      
+      return true;
+    }
+      
+});
+*/

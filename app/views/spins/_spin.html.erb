@@ -1,7 +1,11 @@
-<li>
-  <span class="content"><%= wrap_text(spin.content,40) %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(spin.created_at) %> ago.
-    	<%= render 'shared/delete_link', object: spin %>
-  </span>
+<li id="<%= spin.id %>">
+	<%= link_to gravatar_for(current_user), current_user  %>
+    <span class="user">
+		<%= link_to current_user.name, current_user %>
+	</span>
+	<span class="content"><%= wrap_text(spin.content,40) %></span>
+	<span class="timestamp">
+		Posted <%= time_ago_in_words(spin.created_at) %> ago.
+		<%= render 'shared/delete_link', object: spin %>
+	</span>
 </li>

@@ -12,14 +12,7 @@
 
 <%- end -%>
 <%- content_for :body do -%>
-<div class="span8 well">
-  <h5>User</h5>
-  <h6>
-   <%= gravatar_for @user %>
-   <%= @user.name %>
- </h6>
-
-</div>
+<%= render 'shared/user_profile_card' %>   
 <div class="span8">
     <h3><%= @title %></h3>
     <% if @users.any? %>
