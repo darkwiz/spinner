@@ -1,4 +1,4 @@
-Loop::Application.routes.draw do
+Spinner::Application.routes.draw do
 
   get "user_confirmations/new"
 
@@ -11,12 +11,12 @@ Loop::Application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update] 
   resources :user_confirmations, only: [:new, :show]
 
-  root to: 'loop#home'
+  root to: 'spinner#home'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete # via DELETE (like POST,GET..)
-  match '/help' , to: 'loop#help'
+  match '/help' , to: 'spinner#help'
 
   resources :tags, only: [] do
     get :autocomplete_tag_name, :on => :collection

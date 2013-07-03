@@ -18,7 +18,7 @@ class SpinsController < ApplicationController
 				else
 					@spin = current_user.spins.build 
 					@timeline_items = current_user.timeline.page(params[:page])
-					render 'loop/home'
+					render 'spinner/home'
 				end
 			}
 			format.js {

@@ -1,0 +1,13 @@
+<% if signed_in? %>
+
+<%# Logged User Home%>
+
+<%= render 'spinner/home_logged' %>
+
+<% else %>
+
+<%# Non Logged User Home%>
+
+<%= render 'spinner/home_base' %>
+
+<% end %>

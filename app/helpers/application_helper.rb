@@ -3,7 +3,7 @@ module ApplicationHelper
 	# Provides the title for every page
 
 	def full_title(page_title)
-		base_title = 'Loop App'
+		base_title = 'Spinner App'
 		if page_title.empty?
 			base_title
 		else 
