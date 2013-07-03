@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
   has_many :spins, dependent: :destroy # spins should be destroyed along with the user
+  has_many :comments, dependent: :destroy # comments should be destroyed along with the user
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy  
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id",

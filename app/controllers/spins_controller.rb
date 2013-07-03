@@ -7,8 +7,8 @@ class SpinsController < ApplicationController
 
 
 	def create
-		params[:spin][:in_reply_to] = get_username(params[:spin][:content])
 		@spin = current_user.spins.build(params[:spin])
+		@spin.in_reply_to = get_username(params[:spin][:content])
 		ok = @spin.save
 		respond_to do |format| 
 			format.html {
@@ -16,13 +16,14 @@ class SpinsController < ApplicationController
 					flash[:success] = "Spin created!"
 					redirect_to root_url
 				else
+					@spin = current_user.spins.build 
 					@timeline_items = current_user.timeline.page(params[:page])
 					render 'loop/home'
 				end
 			}
 			format.js {
 				if ok
-					render 'create', object: current_user
+					render 'create'
 				else
 
 				end
@@ -37,7 +38,7 @@ class SpinsController < ApplicationController
 	end
 
 	private
-	# Checks if a spin is in reply to a user (if @ symbol is present)
+	# Checks if a spin is in reply to a user (if @ char is present)
 	
 	def get_username(txt, col = 140)
 		if txt.match(/^@([A-Za-z0-9_]{1,140})/)

@@ -19,9 +19,10 @@ class UsersController < ApplicationController
   # methods page() and per(number_of_occurences in a page)
 
   def index
+    
+    
     if params[:search]
          @users = User.search(params[:search]).page(params[:page])
-         
       else
          @users = User.page(params[:page])
       end
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
 
 
   def edit
+   
     @user = User.find(params[:id])
   end
 

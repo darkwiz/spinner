@@ -1,0 +1,7 @@
+<%= form_for([object, Comment.new]) do |f| %>  
+
+				<%= f.text_area :body, placeholder: "Compose new comment...", rows: 2 %>
+
+				<%= f.submit "Post Comment", class: "btn btn-primary pull-right" %>
+
+				<% end %>

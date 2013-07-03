@@ -17,4 +17,7 @@ module ApplicationHelper
 		!signed_in? && current_page?('/') ? "homepage" : "no_homepage"
 		#current_page?('/') ? "homepage" : "no_homepage"
 	end
+
+	
+	
 end

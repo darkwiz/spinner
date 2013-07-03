@@ -1,12 +1,12 @@
 class TagsController < ApplicationController
 def autocomplete_tag_name
 	if params[:name]
-        tags = User.select([:name]).where("name LIKE ?", "%#{params[:name]}%")
+        tags = User.select([:id,:name]).where("name LIKE ?", "%#{params[:name]}%")
       else
          tags = User.all
       end
          result = tags.collect do |t|
-          { value: t.name }
+          { id: t.id, name: t.name }
           end
       render json: result
    end

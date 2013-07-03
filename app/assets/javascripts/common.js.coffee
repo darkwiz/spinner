@@ -1,3 +1,9 @@
+###
+ Autocomplete with jquery-ui, sostituito con typeahead
+ necessita di: 1- gem 'jquery-ui-rails'
+               2- //= require jquery.ui.all
+
+
 $ ->
   $('.span3').autocomplete
     minLength: 2
@@ -9,7 +15,16 @@ $ ->
           name: request.term
         success: (data) ->
           response(data)  
-###
+
+-- Non strettamente necessario dovrebbe fare lo stesso dello stoppropagation() per i metodi ujs di rails -- 
+e comunque fa danni sulla timeline
+$ ->
+    $('body *').not('.accordion-toggle a, .accordion-toggle a *')
+               .click ->
+                     $('.accordion-toggle a').toggle()
+
+
+
 CoffeScript Version of create spin form with ajax
 $ ->
   $('#new_spin_ajax').submit ->

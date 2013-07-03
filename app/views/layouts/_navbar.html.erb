@@ -5,11 +5,12 @@
 	<li class="divider-vertical"></li>
 	<%= form_tag  users_path , :method => 'get', :id => "users_search", :class => "navbar-search form-search offset2" do %>
 	<div class="input-append">
-		<%= text_field_tag :search, params[:name], data: { source: autocomplete_tag_name_tags_path }, :class => "span3 search-query", :placeholder => "Search", :autocomplete => "off" %>
+		<%= text_field_tag :search, params[:name], data: { provide: 'typeahead', source: autocomplete_tag_name_tags_path }, :class => "span3 search-query", :placeholder => "Search", :autocomplete => "off" %>
 		<%= button_tag(type: "submit", class: "btn btn-small") do %>
 		<i class="icon-search"></i>
 		<% end %>
 	</div>
+	 
 	<% end %>
 </ul>
 <ul class="nav pull-right">

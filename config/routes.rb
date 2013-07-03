@@ -27,6 +27,10 @@ Loop::Application.routes.draw do
       get :following, :followers
     end
   end
+
+  resources :spins, shallow: true do
+    resources :comments
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

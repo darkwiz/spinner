@@ -11,5 +11,9 @@ $(modal).modal('hide');
 $(".spins").prepend("<%= escape_javascript(render(@spin)) %>");
 /* Highlight the new spin */
 $("li#<%= @spin.id %>").effect("highlight", {}, 1500);
+/* Updates the spins count new spin */
+$("#spins").html('<%= current_user.spins.count %>')
 /* Reset the create spin form */
 $("#new_spin_ajax")[0].reset();
+/* Reset the the spin char counter */
+$(reset_counter);

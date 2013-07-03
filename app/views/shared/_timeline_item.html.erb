@@ -1,13 +1,30 @@
-<li id="<%= timeline_item.id %>">
-	<%= link_to gravatar_for(timeline_item.user), timeline_item.user %>
-	<span class="user">
-		<%= link_to timeline_item.user.name, timeline_item.user %>
-	</span>
-	<span class="content"><%= wrap_text(timeline_item.content) %></span>
-	<span class="timestamp">
-		Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
-	</span>
-	
-	<%= render 'shared/delete_link', object: timeline_item %>
-	
-</li>
+<div class="accordion" id="accordion2">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<li id="<%= timeline_item.id %>">
+				<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= timeline_item.id %>" data-parent="#accordion2">
+					 <%= link_to gravatar_for(timeline_item.user), timeline_item.user, class: "other" %>
+						<%= link_to timeline_item.user.name, timeline_item.user, class: "other" %>
+						
+
+					<span class="content"><%= wrap_text(timeline_item.content) %></span>
+					<span class="timestamp">
+						Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
+					</span>
+					<%= render 'shared/delete_link', object: timeline_item %>
+				   	</div>
+				</li>
+		</div>
+		<div id="collapse<%= timeline_item.id %>" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<% if timeline_item.comments.any? %>
+				<ol class="comments">
+					<%= render timeline_item.comments %>
+				</ol>
+				<% end %>
+				<%= render 'shared/comment_form', object: timeline_item %>
+				<br />
+			</div>
+		</div>
+	</div>
+</div>
