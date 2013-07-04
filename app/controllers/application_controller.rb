@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper  
   
+  layout Proc.new { |controller| controller.request.xhr? ? nil : 'application' }
+
   # Force signout to prevent CSRF attacks
   def handle_unverified_request
     sign_out

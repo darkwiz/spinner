@@ -6,7 +6,7 @@ Spinner::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :spins, only: [:create, :destroy, :insert]
+  #resources :spins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update] 
   resources :user_confirmations, only: [:new, :show]
@@ -28,7 +28,7 @@ Spinner::Application.routes.draw do
     end
   end
 
-  resources :spins, shallow: true do
+  resources :spins, only: [:create,:edit, :destroy], shallow: true do
     resources :comments
   end
   

@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20130703100315) do
     t.string   "in_reply_to"
   end
 
+  add_index "spins", ["user_id", "created_at"], :name => "index_spins_on_user_id_and_created_at"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"

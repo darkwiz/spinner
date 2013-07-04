@@ -31,6 +31,14 @@ class SpinsController < ApplicationController
 		end
 	end
 
+def edit
+	@spin = current_user.spins.find(params[:id])
+	respond_to do |format|
+	format.js
+	end
+	
+end
+
 	def destroy
 		#the spin was put into @spin by the before filter spin_owner
 		@spin.destroy
