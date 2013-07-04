@@ -5,9 +5,8 @@ var title       =   '.modal-title',
     toolbar     =   'div.modal-footer';
     modal       =   '#ajax-modal'
 
-$('.modal-title:last-child').html("Edit Spin");
-$('div.modal-footer input').val("Commit Changes");
+$(modal).replaceWith('<%= escape_javascript(render('layouts/modal', object: @spin)) %>')
 
-$('#spin_content').val("<%= escape_javascript(@spin.content) %>");
+$('.modal-title:last-child').html("Edit Spin");
 
 $(modal).modal();

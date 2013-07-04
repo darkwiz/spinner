@@ -34,7 +34,6 @@ class UsersController < ApplicationController
 
 
   def edit
-   
     @user = User.find(params[:id])
   end
 
@@ -56,7 +55,6 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @spins = @user.spins.page(params[:page]).per(6)
-    @spin = @user.spins.build
   end
 
 

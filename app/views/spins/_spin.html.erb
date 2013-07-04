@@ -12,7 +12,7 @@
 						Posted <%= time_ago_in_words(spin.created_at) %> ago.
 					</span>
 					<%= render 'shared/delete_link', object: spin %>
-					 <%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), remote: true  %>
+					 <%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), remote: true, class: 'edit generic'  %>
 				   	</div>
 				</li>
 		</div>

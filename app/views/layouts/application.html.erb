@@ -9,9 +9,6 @@
 </head>
 <body class='<%= body_class %>'>
 	<div class="container">
-<% if signed_in? %>
-        <%= render 'layouts/modal' %>
-        <% end %>
 		<div id="mainbar">
 			<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="navbar-inner">
@@ -41,5 +38,8 @@
 	<%= render 'layouts/footer' %>
 	<%= debug([params, @debug]) if Rails.env.development? %>
 </div>
+<% if signed_in? %>
+        <%= render 'layouts/modal' %>
+ <% end %>
 </body>
 </html>
