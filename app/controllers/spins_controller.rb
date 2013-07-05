@@ -1,7 +1,6 @@
 class SpinsController < ApplicationController
 	before_filter :signed_in_user, only: [:create, :destroy]
 	before_filter :spin_owner, only: :destroy
-
 	def index
 	end
 
@@ -31,11 +30,21 @@ class SpinsController < ApplicationController
 		end
 	end
 
+	def edit
+		@spin = current_user.spins.find(params[:id])
+		respond_to do |format|
+			format.js
+		end
+	end
+
+
 	def destroy
 		#the spin was put into @spin by the before filter spin_owner
 		@spin.destroy
 		redirect_to root_url
 	end
+
+	
 
 	private
 	# Checks if a spin is in reply to a user (if @ char is present)

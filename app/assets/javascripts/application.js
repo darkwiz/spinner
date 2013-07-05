@@ -80,12 +80,12 @@ $(function() {
 
 /* Ferma la propagazione dell'evento click su i link dei dati utente verso l'accordion */
 
+
 $(function() {
-    $('.accordion-toggle a.other').click(function (event) {
+	$('a.other').click(function (event) {
       event.stopPropagation();
   });
 });
-
 
 $(document).ready(reset_counter);
 
