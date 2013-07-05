@@ -39,11 +39,22 @@ def edit
 	
 end
 
-	def destroy
+def update
+  @spin = Spin.find(params[:id])
+  respond_to do |format|
+    if @spin.update_attributes(params[:spin])
+      format.js 
+    else
+      redirect_to current_user
+    end
+  end
+end
+
+def destroy
 		#the spin was put into @spin by the before filter spin_owner
 		@spin.destroy
 		redirect_to root_url
-	end
+end
 
 	private
 	# Checks if a spin is in reply to a user (if @ char is present)

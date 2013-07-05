@@ -1,13 +1,11 @@
-var title       =   '.modal-title',
-    loader      =   '.ajax-loader',
-    content     =   '.modal-body-content',
-    dataRemote  =   'a[data-remote=true]';
-    toolbar     =   'div.modal-footer';
-    modal       =   '#ajax-modal'
+var modal       =   '#ajax-modal'
+
+$(modal).replaceWith('<%= escape_javascript(render('layouts/modal', object: @spin)) %>')
 
 $('.modal-title:last-child').html("Edit Spin");
-$('div.modal-footer input').val("Commit Changes");
 
-$('#spin_content').val("<%= escape_javascript(@spin.content) %>");
+$(modal).modal('show');
 
-$(modal).modal();
+$(modal).on('hidden', function(){
+	$(this).replaceWith('<%= escape_javascript(render('layouts/modal')) %>')
+});
