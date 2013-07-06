@@ -7,5 +7,6 @@ $('.modal-title:last-child').html("Edit Spin");
 $(modal).modal('show');
 
 $(modal).on('hidden', function(){
-	$(this).replaceWith('<%= escape_javascript(render('layouts/modal')) %>')
+	$(this).replaceWith('<%= escape_javascript(render('layouts/modal')) %>');
+	$("#new_spin_ajax").val('');
 });

@@ -27,9 +27,16 @@ Spinner::Application.routes.draw do
     end
   end
 
-  resources :spins, only: [:create, :edit, :destroy, :update], shallow: true do
+  resources :spins, shallow: true do
     resources :comments
   end
+ #Provvisorio
+  resources :users do
+    member do
+      get :respin
+    end
+  end
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
