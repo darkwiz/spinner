@@ -1,3 +1,4 @@
+<div id="<%= spin.id %>">
 <div class="accordion" id="accordion2">
 	<div class="accordion-group">
 		<div class="accordion-heading">
@@ -11,9 +12,11 @@
 					<span class="timestamp">
 						Posted <%= time_ago_in_words(spin.created_at) %> ago.
 					</span>
-					<%= render 'shared/delete_link', object: spin %>|
-					<%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), :remote => true, class: 'edit generic' %>
-				   	</div> 
+					<% if current_user?(spin.user) %>
+					<%= render 'shared/delete_link', object: spin %>
+					 <%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), remote: true, class: 'edit generic'  %>
+					 <% end %>
+				   	</div>
 				</li>
 		</div>
 		<div id="collapse<%= spin.id %>" class="accordion-body collapse">
@@ -31,3 +34,5 @@
 		</div>
 	</div>
 </div>
+</div>
+

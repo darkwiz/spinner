@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
 		end 
 end
 
+
 def destroy
 		#the spin was put into @spin by the before filter spin_owner
 		@comment.destroy

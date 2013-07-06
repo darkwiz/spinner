@@ -1,4 +1,12 @@
-var  modal   =   '#ajax-modal'
+var modal       =   '#ajax-modal'
 
-$(modal).modal();
+$(modal).replaceWith('<%= escape_javascript(render('layouts/modal', object: @spin)) %>')
+
+$('.modal-title:last-child').html("Edit Spin");
+
+$(modal).modal('show');
+
+$(modal).on('hidden', function(){
+	$(this).replaceWith('<%= escape_javascript(render('layouts/modal')) %>')
+});
 

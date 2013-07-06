@@ -34,7 +34,6 @@ class UsersController < ApplicationController
 
 
   def edit
-   
     @user = User.find(params[:id])
   end
 
@@ -54,9 +53,9 @@ class UsersController < ApplicationController
   # Shows an user profile (and his own spins)
 
   def show
+    @spin = current_user.spins.build if signed_in?
   	@user = User.find(params[:id])
     @spins = @user.spins.page(params[:page]).per(6)
-    @spin = @user.spins.build
   end
 
 

@@ -1,0 +1,10 @@
+var modal       =   '#ajax-modal'
+
+/* Hide the modal spin form */
+$(modal).modal('hide');
+/* Collapse the spin's comments  */
+$("#collapse<%= @spin.id %>").collapse('hide');
+/* Replace the old spin with the edited one */
+$("div#<%= @spin.id %>").replaceWith("<%= escape_javascript(render(@spin)) %>");
+/* Highlight the edited spin */
+$("div#<%= @spin.id %>").effect("highlight", {}, 1500);

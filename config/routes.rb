@@ -27,7 +27,8 @@ Spinner::Application.routes.draw do
     end
   end
 
-  resources :spins, only: [:create, :edit, :destroy], shallow: true do
+
+  resources :spins, only: [:create, :edit, :destroy, :update], shallow: true do
     resources :comments
   end
   
