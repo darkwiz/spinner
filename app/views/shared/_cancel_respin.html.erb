@@ -1,0 +1,6 @@
+<%= form_for(object.respins.find_by_respinner_id(current_user),
+             html: { method: :delete }, remote: true) do |f| %>
+<%= button_tag( type: 'submit', class: "respin" ) do %>
+		<i class="icon-retweet"></i> Respinned
+<% end %>
+<% end %>

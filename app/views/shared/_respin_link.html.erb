@@ -1,0 +1,12 @@
+<span id="respin_form_<%= object.id %>">
+  <% if object.respinned?(current_user) %>
+    <%= render 'shared/cancel_respin', object: object %>
+  <% else %>
+    <%= render 'shared/respin', object: object %>
+  <% end %>
+</span>
+
+
+
+
+

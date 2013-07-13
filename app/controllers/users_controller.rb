@@ -52,10 +52,15 @@ class UsersController < ApplicationController
 
   # Shows an user profile (and his own spins)
 
+  #    @spins = @user.spins + Spin.including_respins(current_user)
+  # @spins = Kaminari.paginate_array(@spins).page(params[:page])
+
   def show
     @spin = current_user.spins.build if signed_in?
   	@user = User.find(params[:id])
-    @spins = @user.spins.page(params[:page]).per(6)
+    @spins = @user.user_spins.page(params[:page])
+    #@spins = Kaminari.paginate_array(@spins).page(params[:page])
+    #@spins = @user.spins.page(params[:page]).per(6)
   end
 
 

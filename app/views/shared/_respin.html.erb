@@ -1,0 +1,6 @@
+<%= form_for(object.respins.build(spin_id: object.id), remote: true) do |f| %>
+  <%= f.hidden_field :spin_id %>
+  <%= button_tag( type: 'submit', class: "respin" ) do %>
+		<i class="icon-retweet"></i> Respin
+<% end %>
+<% end %>

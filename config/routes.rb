@@ -7,6 +7,7 @@ Spinner::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :respins, only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update] 
   resources :user_confirmations, only: [:new, :show]
 
@@ -32,13 +33,6 @@ Spinner::Application.routes.draw do
     resources :comments
   end
   
- #Provvisorio
-  resources :users do
-    member do
-      get :respin
-    end
-  end
-
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

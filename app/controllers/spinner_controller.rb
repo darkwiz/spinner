@@ -3,7 +3,9 @@ class SpinnerController < ApplicationController
   def home
     if signed_in?
         @spin = current_user.spins.build 
-        @timeline_items = current_user.timeline.page(params[:page])
+        arr = current_user.timeline
+        @timeline_items = Kaminari.paginate_array(arr).page(params[:page])
+        #current_user.timeline.page(params[:page])
         else
         @user = User.new
       end

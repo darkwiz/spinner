@@ -289,12 +289,35 @@ aside {
 
 /* delete-links */
 
-.generic{
+.generic {
   color: #000;
-  :hover {
+  &:hover {
     color : #222;
   }
 }
+
+/* Respin button and form */
+
+button.respin {
+     background: none!important;
+     border: none; 
+     padding: 0!important;
+     vertical-align: bottom;
+     /*optional*/
+     color: #000;
+     &:hover {
+       color : #222;
+       text-decoration: underline;
+       cursor: pointer;
+     }
+}
+
+form.new_respin, .edit_respin{
+  margin: 0;
+  display:inline
+}
+
+
 /* miscellaneous */
 
 .debug_dump {

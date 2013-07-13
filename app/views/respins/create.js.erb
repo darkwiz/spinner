@@ -1,0 +1,2 @@
+$("span#respin_forma_<%= @spin.id %>").html("<%= escape_javascript(render('shared/cancel_respin', object: @spin )) %>")
+$("span#respin_form_<%= @spin.id %>").effect("highlight", {}, 1500);

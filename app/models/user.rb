@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
   has_many :spins, dependent: :destroy # spins should be destroyed along with the user
+  has_many :respins, foreign_key: "respinner_id"
+  has_many :respinned_spins, through: :respins, source: :spin
   has_many :comments, dependent: :destroy # comments should be destroyed along with the user
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy  
   has_many :followed_users, through: :relationships, source: :followed
@@ -44,11 +46,11 @@ class User < ActiveRecord::Base
   end
 
   def timeline
-    # Spin.where("user_id = ?", id)
-    
-      Spin.from_users_followed_by_and_replies(self)
+      (Spin.from_users_followed_by(self) + Spin.including_replies(self)).uniq
+  end
 
-      #Spin.including_replies(self)
+  def user_spins
+     Spin.spins_respins(self)
   end
 
   def following?(other_user)
@@ -69,6 +71,7 @@ class User < ActiveRecord::Base
     #find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
   end
 end
+
 
 private
   

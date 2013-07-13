@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703100315) do
+ActiveRecord::Schema.define(:version => 20130708124957) do
 
   create_table "comments", :force => true do |t|
     t.string   "body"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(:version => 20130703100315) do
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
+  create_table "respins", :force => true do |t|
+    t.integer  "respinner_id"
+    t.integer  "spin_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "respins", ["respinner_id", "spin_id"], :name => "index_respins_on_respinner_id_and_spin_id", :unique => true
+  add_index "respins", ["respinner_id"], :name => "index_respins_on_respinner_id"
+  add_index "respins", ["spin_id"], :name => "index_respins_on_spin_id"
+
   create_table "spins", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
@@ -41,8 +52,6 @@ ActiveRecord::Schema.define(:version => 20130703100315) do
     t.datetime "updated_at",  :null => false
     t.string   "in_reply_to"
   end
-
-  add_index "spins", ["user_id", "created_at"], :name => "index_spins_on_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -5,8 +5,6 @@
 				<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= timeline_item.id %>" data-parent="#accordion2">
 					 <%= link_to gravatar_for(timeline_item.user), timeline_item.user, class: "other" %>
 						<%= link_to timeline_item.user.name, timeline_item.user, class: "other" %>
-						
-
 					<span class="content"><%= wrap_text(timeline_item.content) %></span>
 					<span class="timestamp">
 						Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
@@ -14,6 +12,7 @@
 					<% if current_user?(timeline_item.user) %>
 					<%= render 'shared/delete_link', object: timeline_item %>
 					<% end %>
+					<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 				   	</div>
 				</li>
 		</div>
