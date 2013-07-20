@@ -1,0 +1,10 @@
+<div class="respin-stats">
+  <a href="">
+	<strong id="respinners" class="respin-stats">
+		<%= pluralize(object.respinners.count, "Respinner") %>
+		</strong>
+  </a>
+	<% object.respinners.each do |respinner| %>
+		<%= link_to gravatar_for(respinner, size: 20), respinner, class: "respin-stats", title: respinner.name %>
+	<% end %>
+</div>

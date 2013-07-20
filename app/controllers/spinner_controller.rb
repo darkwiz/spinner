@@ -3,8 +3,8 @@ class SpinnerController < ApplicationController
   def home
     if signed_in?
         @spin = current_user.spins.build 
-        arr = current_user.timeline
-        @timeline_items = Kaminari.paginate_array(arr).page(params[:page])
+        ary = current_user.timeline.sort_by(&:last_respin_time).reverse
+        @timeline_items = Kaminari.paginate_array(ary).page(params[:page])
         #current_user.timeline.page(params[:page])
         else
         @user = User.new

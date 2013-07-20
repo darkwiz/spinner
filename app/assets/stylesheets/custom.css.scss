@@ -318,6 +318,25 @@ form.new_respin, .edit_respin{
 }
 
 
+.respin-stats {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 0 5px 10px;
+    color: gray;
+    &:first-child {
+      border-right: 1px solid $grayLighter;
+      padding: 0 5px 5px 10px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
 /* miscellaneous */
 
 .debug_dump {

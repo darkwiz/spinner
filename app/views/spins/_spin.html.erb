@@ -1,25 +1,32 @@
-<% unless spin.respinners.any? %>
 <div id="<%= spin.id %>">
-<div class="accordion" id="accordion2">
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<li id="<%= spin.id %>">
-				<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= spin.id %>" data-parent="#accordion2">
-					 <%= link_to gravatar_for(spin.user), spin.user, class: "other" %>
+	<div class="accordion" id="accordion2">
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				<li id="<%= spin.id %>">
+					<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= spin.id %>" data-parent="#accordion2">
+						<%= link_to gravatar_for(spin.user), spin.user, class: "other" %>
 						<%= link_to spin.user.name, spin.user, class: "other" %>
 
-					<span class="content"><%= wrap_text(spin.content) %></span>
-					<span class="timestamp">
-						Posted <%= time_ago_in_words(spin.created_at) %> ago.
-					</span>
-					<% if current_user?(spin.user) %>
-					<%= render 'shared/delete_link', object: spin %>
-					 <%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), remote: true, class: 'edit generic'  %>
-					 <% end %>
-				   	</div>
+						<span class="content"><%= wrap_text(spin.content) %></span>
+						<span class="timestamp">
+							Posted <%= time_ago_in_words(spin.created_at) %> ago.
+						</span>
+						<% if current_user?(spin.user) %>
+						  <%= render 'shared/delete_link', object: spin %>
+						     <%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), remote: true, class: 'edit generic'  %>
+						   <% else %>
+						<%= render 'shared/respin_link', object: spin if signed_in? %>
+						<% end %>
+				    <% spin.respinners.each do |respinner| %>
+						    <% if respinner.id == @user.id %>
+						        by <%= link_to respinner.name, respinner, class: "other" %>.
+							<% end %>
+					<% end %>
+					</div>
 				</li>
-		</div>
+			</div>
 		<div id="collapse<%= spin.id %>" class="accordion-body collapse">
+			<%= render 'shared/respin_stats', object: spin if spin.respinners.count > 0 %>
 			<div class="accordion-inner">
 				<% if spin.comments.any? %>
 				<ol class="comments">
@@ -28,55 +35,13 @@
 				<% else %>
 				<br />
 				<% end %>
-				<%= render 'shared/comment_form', object: spin %>
+				<%= render 'shared/comment_form', object: spin if signed_in? %>
 				<br />
 			</div>
 		</div>
 	</div>
 </div>
 </div>
-<% else %>
-<% spin.respinners.each do |respinner| %>
-<div id="<%= spin.id %>">
-<div class="accordion" id="accordion2">
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<li id="<%= spin.id %>">
-				<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= spin.id %>" data-parent="#accordion2">
-					 <%= link_to gravatar_for(spin.user), spin.user, class: "other" %>
-						<%= link_to spin.user.name, spin.user, class: "other" %>
-
-					<span class="content"><%= wrap_text(spin.content) %></span>
-					<span class="timestamp">
-						Posted <%= time_ago_in_words(spin.created_at) %> ago.
-					</span>	
-				  <% if respinner.id == @user.id %>
-				    	Respinned by <%= link_to respinner.name, respinner, class: "other" %>.
-					       <% if current_user?(respinner) %>
-					   <%= link_to("Toggle Respin") %>
-					 <% end %>
-					 <% end %>
-				   	</div>
-				</li>
-		</div>
-		<div id="collapse<%= spin.id %>" class="accordion-body collapse">
-			<div class="accordion-inner">
-				<% if spin.comments.any? %>
-				<ol class="comments">
-					<%= render spin.comments %>
-				</ol>
-				<% else %>
-				<br />
-				<% end %>
-				<%= render 'shared/comment_form', object: spin %>
-				<br />
-			</div>
-		</div>
-	</div>
-</div>
-</div>	
-<% end %>	
-<% end %>
 
 			
 		

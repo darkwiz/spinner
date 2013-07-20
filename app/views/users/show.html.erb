@@ -10,7 +10,7 @@
   <aside>
     <section>
       <% unless current_user?(@user) %>
-          <%= render 'shared/reply_spin_form' %>
+          <%= render 'shared/reply_spin_form' if signed_in? %>
       <% else %>
           Multimedia Stockpile
         <% end %>

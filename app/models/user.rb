@@ -45,12 +45,13 @@ class User < ActiveRecord::Base
        UserMailer.user_confirmation(self).deliver
   end
 
-  def timeline
-      (Spin.from_users_followed_by(self) + Spin.including_replies(self)).uniq
-  end
 
+  def timeline
+      (Spin.from_users_followed_by(self) + Spin.including_replies(self)).uniq + Spin.respinned_by_followed(self) 
+  end
+ 
   def user_spins
-     Spin.spins_respins(self)
+     Spin.user_spins(self) + Spin.user_respins(self)
   end
 
   def following?(other_user)
@@ -66,10 +67,10 @@ class User < ActiveRecord::Base
   end
 
   def self.search(search)
-  if search
-    where("name LIKE ?", "%#{search}%") 
-    #find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-  end
+    if search
+      where("name LIKE ?", "%#{search}%") 
+      #find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    end
 end
 
 

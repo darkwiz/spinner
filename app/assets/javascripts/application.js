@@ -88,6 +88,13 @@ $(function() {
   });
 });
 
+$(function() {
+	$('button.respin').on("click",function (event) {
+      event.stopPropagation();
+  });
+});
+
+
 $(document).ready(reset_counter);
 
 /*

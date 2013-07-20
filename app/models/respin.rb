@@ -5,4 +5,12 @@ class Respin < ActiveRecord::Base
 
   validates :respinner_id, presence: true
   validates :spin_id, presence: true
+ 
+ scope :by_respin_date, lambda { order('respins.created_at DESC') }
+
+ def self.followed_respins_ids(user)
+  followed_user_ids = user.followed_user_ids
+     where("respinner_id IN (:followed_user_ids)", 
+      followed_user_ids: followed_user_ids).pluck(:spin_id)
+ end
 end

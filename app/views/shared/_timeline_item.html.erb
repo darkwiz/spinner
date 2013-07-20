@@ -1,22 +1,27 @@
+<% unless timeline_item.has_attribute? :respinner_id  %>
 <div class="accordion" id="accordion2">
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<li id="<%= timeline_item.id %>">
 				<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= timeline_item.id %>" data-parent="#accordion2">
-					 <%= link_to gravatar_for(timeline_item.user), timeline_item.user, class: "other" %>
+					    <%= link_to gravatar_for(timeline_item.user), timeline_item.user, class: "other" %>
 						<%= link_to timeline_item.user.name, timeline_item.user, class: "other" %>
 					<span class="content"><%= wrap_text(timeline_item.content) %></span>
 					<span class="timestamp">
 						Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
 					</span>
 					<% if current_user?(timeline_item.user) %>
-					<%= render 'shared/delete_link', object: timeline_item %>
+						<%= render 'shared/delete_link', object: timeline_item %>
+					<% else %>
+						<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 					<% end %>
-					<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 				   	</div>
 				</li>
 		</div>
 		<div id="collapse<%= timeline_item.id %>" class="accordion-body collapse">
+			<% if timeline_item.respinners.any? %>
+				<%= render 'shared/respin_stats', object: timeline_item if timeline_item.respinners.count > 0 %>
+			<% end %>
 			<div class="accordion-inner">
 				<% if timeline_item.comments.any? %>
 				<ol class="comments">
@@ -24,8 +29,46 @@
 				</ol>
 				<% end %>
 				<%= render 'shared/comment_form', object: timeline_item %>
-				<br />
 			</div>
 		</div>
 	</div>
 </div>
+<% else %>
+<div class="accordion" id="accordion2">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<li id="<%= timeline_item.respin_id %>">
+				<div class="accordion-toggle" data-toggle="collapse" data-target="#collapse<%= timeline_item.respin_id %>" data-parent="#accordion2">
+						 <%= link_to gravatar_for(timeline_item.user), timeline_item.user, class: "other" %>
+						 <%= link_to timeline_item.user.name, timeline_item.user, class: "other" %>
+					<span class="content"><%= wrap_text(timeline_item.content) %></span>
+					<span class="timestamp">
+						Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
+					</span>
+						<% if current_user?(timeline_item.user) %>
+							<%= render 'shared/delete_link', object: timeline_item %>
+						<% else %>
+							<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
+						<% end %>
+					<% timeline_item.respinners.each do |respinner| %>
+							 <% if respinner.id == timeline_item.respinner_id %>
+									Respinned by <%= link_to respinner.name, respinner, class: "other" %>
+							 <% end %>
+					<% end %>
+				   	</div>
+				</li>
+		</div>
+		<div id="collapse<%= timeline_item.respin_id %>" class="accordion-body collapse">
+			<%= render 'shared/respin_stats', object: timeline_item if timeline_item.respinners.count > 0 %>
+			<div class="accordion-inner">
+				<% if timeline_item.comments.any? %>
+					<ol class="comments">
+						<%= render timeline_item.comments %>
+					</ol>
+				<% end %>
+				<%= render 'shared/comment_form', object: timeline_item %>
+			</div>
+		</div>
+	</div>
+</div>				
+<% end %>

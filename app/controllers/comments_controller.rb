@@ -23,11 +23,10 @@ end
 
 private
 	
-
 	def comment_owner
         begin
         	@comment = current_user.comments.find(params[:id])	
         rescue
         	redirect_to(root_path) if @comment.nil?
         end
-    end
+end
