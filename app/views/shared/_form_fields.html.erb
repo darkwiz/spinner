@@ -14,3 +14,8 @@
 
     <%= f.label :password_confirmation, "Confirm Password" %>
     <%= f.password_field :password_confirmation %>
+
+    <div class="field">
+        <%= f.check_box :private %>
+        <%= label_tag :private , "Check if you want a private profile"%>
+    </div>

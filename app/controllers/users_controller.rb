@@ -84,11 +84,11 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     unless user.admin?
-      user.destroy
-      flash[:success] = "User deleted"
-      redirect_to users_url
+        user.destroy
+        flash[:success] = "User deleted"
+        redirect_to users_url
       else
-      redirect_to users_url , :notice => "Cannot Delete Admin!"
+        redirect_to users_url , :notice => "Cannot Delete Admin!"
       end
   end
 
@@ -96,15 +96,26 @@ class UsersController < ApplicationController
   def following
     @title = "Following"
     @user = User.find(params[:id])
-    @users = @user.followed_users.page(params[:page])
+    @users = @user.followed_users.approved_relationships.page(params[:page])
     render 'show_follow'
   end
 
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
-    @users = @user.followers.page(params[:page])
+    @users = @user.followers.approved_relationships.page(params[:page])
     render 'show_follow'
+  end
+
+  def pending_requests
+    @user = User.find(params[:id])
+    if current_user.private && current_user?(@user)
+      @title = "Pending Following Requests"
+      @users = @user.followers.pending_requests.page(params[:page])
+      render 'show_follow'
+    else
+      redirect_to @user
+    end
   end
 
   private

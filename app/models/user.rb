@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :username, :confirmed_user
+  attr_accessible :name, :email, :password, :password_confirmation, :username, :confirmed_user, :private
   attr_accessor :updating_password
 
   has_secure_password
@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }, :if => :should_validate_password?
   validates :password_confirmation, presence: true, :if => :should_validate_password?
 
+  scope :pending_requests, lambda { Relationship.pending }
+  scope :approved_relationships, lambda { Relationship.approved }
+
   def should_validate_password?
     updating_password || new_record?
   end
@@ -45,7 +48,6 @@ class User < ActiveRecord::Base
        UserMailer.user_confirmation(self).deliver
   end
 
-
   def timeline
       (Spin.from_users_followed_by(self) + Spin.including_replies(self)).uniq + Spin.respinned_by_followed(self) 
   end
@@ -59,17 +61,33 @@ class User < ActiveRecord::Base
   end
 
   def follow!(other_user)
-    relationships.create!(followed_id: other_user.id)
+    if other_user.private
+      relationships.create!(followed_id: other_user.id, approved: false)
+    else
+      relationships.create!(followed_id: other_user.id)
+    end
   end
 
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
+  def reject!(other_user)
+     reverse_relationships.find_by_follower_id(other_user.id).destroy
+  end
+
+  def can_see?(other_user)
+    begin
+      relationships.find_by_followed_id(other_user.id).approved
+    rescue => e
+      logger.warn "Unable to find record: #{e}"
+      false
+    end
+  end
+
   def self.search(search)
     if search
       where("name LIKE ?", "%#{search}%") 
-      #find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
     end
 end
 

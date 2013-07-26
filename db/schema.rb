@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708124957) do
+ActiveRecord::Schema.define(:version => 20130721104134) do
 
   create_table "comments", :force => true do |t|
     t.string   "body"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(:version => 20130708124957) do
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "approved",    :default => true
   end
 
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20130708124957) do
     t.boolean  "confirmed_user",         :default => false
     t.string   "user_confirm_token"
     t.datetime "user_confirm_sent_at"
+    t.boolean  "private",                :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

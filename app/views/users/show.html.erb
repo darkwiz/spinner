@@ -1,19 +1,16 @@
  <% provide(:title, "Home Page") %>
  <%- content_for :sidebar do -%>
  <div class="span4 spinner-settings-sidenav">
-  <ul class="nav nav-tabs nav-stacked">
-    <li class="active"><a href="#"><i class="icon-chevron-right"></i>Account</a></li>   <%# active=selected %>
-    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-  </ul>
+  <%= render 'shared/side_nav_stacked' %>
   <aside>
     <section>
-      <% unless current_user?(@user) %>
-          <%= render 'shared/reply_spin_form' if signed_in? %>
+      <% if current_user?(@user) && current_user.followers.pending_requests.any? %>         
+            <%= render 'shared/request_notifications' %>         
+      <% elsif @user.private && !current_user.can_see?(@user) %>
+         
       <% else %>
-          Multimedia Stockpile
-        <% end %>
+          <%= render 'shared/reply_spin_form' if signed_in? %>
+      <% end %>
     </section>
   </aside>
 </div>
@@ -24,12 +21,19 @@
 <%= render 'shared/user_profile_card' %>  
 
 <div class="span8 well">
+<% if !@user.private || current_user.can_see?(@user) || current_user?(@user) %>
   <% if @user.spins.any? %>
-  <h3>Spins (<%= @user.spins.count %>)</h3>
-  <ol class="spins">
-    <%= render @spins %>
-  </ol>
-  <%= paginate @spins %>
+    <h3>Spins (<%= @user.spins.count %>)</h3>
+    <ol class="spins">
+     <%= render @spins %>
+    </ol>
+     <%= paginate @spins %>
+  <% else %>
+     <h5>No spins here!</h5>
   <% end %>
+<% else %>
+  <h5><%= "#{@user.username}" %>'s spins are protected just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.
+ </h5>
+<% end %>
 </div>
 <%- end -%>

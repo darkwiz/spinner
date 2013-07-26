@@ -337,6 +337,18 @@ form.new_respin, .edit_respin{
     display: block;
   }
 }
+
+/* Accept/Reject forms buttons */
+
+.approve-reject{
+  margin: 0;
+  display:inline;
+  float: right;
+  input.btn{
+    margin-right: 5px;
+  }
+}
+
 /* miscellaneous */
 
 .debug_dump {

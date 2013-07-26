@@ -1,2 +1,6 @@
+<% if flash %>
+$(".flash").html("<%= escape_javascript(render :partial => 'layouts/messages' , :locals => { :flash => flash }).html_safe %>");
+<% else %>
 $("#follow_form").html("<%= escape_javascript(render('users/unfollow')) %>")
 $("#followers").html('<%= @user.followers.count %>')
+<% end %>

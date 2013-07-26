@@ -1,0 +1,3 @@
+<%= form_for(current_user.reverse_relationships.find_by_follower_id(user_rejected), html: { method: :delete, class: 'approve-reject' }) do |f| %>
+  <%= f.submit "Reject", class: "btn btn" %>
+<% end %>

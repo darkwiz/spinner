@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs nav-stacked">
+    <li class="active"><a href="#"><i class="icon-chevron-right"></i>Account</a></li>   <%# active=selected %>
+    <li><%= link_to 'Followers<i class="icon-chevron-right"></i>'.html_safe, followers_user_path(@user) %></li>  
+    <li><%= link_to 'Following<i class="icon-chevron-right"></i>'.html_safe, following_user_path(@user) %></li>  
+    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li> 
+  </ul>

@@ -1,13 +1,7 @@
 <% provide(:title, @title) %>
  <%- content_for :sidebar do -%>
  <div class="span4 spinner-settings-sidenav">
-
-  <ul class="nav nav-tabs nav-stacked">
-    <li class="active"><a href="#"><i class="icon-chevron-right"></i>Account</a></li>   <%# active=selected %>
-    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-    <li><a href="#"><i class="icon-chevron-right"></i>Theme</a></li>  
-  </ul>
+  <%= render 'shared/side_nav_stacked' %>
 </div>
 
 <%- end -%>
@@ -20,6 +14,14 @@
         <%= render @users %>
       </ul>
       <%= paginate @users %>
+    <% elsif current_page?(:action => 'pending_requests') && !@user.followers.pending_requests.any? %>
+         <h5>Currently you have 0 following requests.</h5>
+    <% else %>
+        <% if current_page?(:action => 'followers') %>
+           <h5>Currently you have no followers </h5>
+        <% else %>
+          <h5>Currently you aren't following any user</h5>
+        <% end %>
     <% end %>
   </div>
 <%- end -%>

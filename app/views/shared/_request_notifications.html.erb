@@ -1,0 +1,4 @@
+<div class="pending_requests_div">
+	You have <%= pluralize(current_user.followers.pending_requests.count, "Request") %>
+	<%= link_to "See", pending_requests_user_path(current_user), class: "btn btn-primary pull-right" %>
+</div>

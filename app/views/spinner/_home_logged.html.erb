@@ -11,9 +11,17 @@
   <section>
     <%= render 'shared/user_stats' %>
   </section>
+  
+  <% if current_user.private && current_user.followers.pending_requests.any? %> 
+  <section>
+    <%= render 'shared/request_notifications' %>
+  </section>
+  <% end %>
+  
   <section>
     <%= render 'shared/spin_form' %>
   </section>
+  
 </aside>
 </div>
 <%- end -%>
