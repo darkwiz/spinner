@@ -1,1 +1,16 @@
-Spinner APP
+ 
+Ruby on Rails-Spin
+===========
+
+Twitter clone made using Ruby on Rails web framework.
+
+The Django version is completed and avaiable on Github.
+
+If you want to contribute or extend this app, feel free to do whatever you want.
+
+------------------------------------------------
+Rails version used to develop the App -> 3.2.12
+
+Contributors
+
+    Gentile Matteo
