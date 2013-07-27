@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130721104134) do
+ActiveRecord::Schema.define(:version => 20130727191921) do
+
+  create_table "blacklisted_users", :id => false, :force => true do |t|
+    t.integer  "blocker_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "blacklisted_users", ["blocker_id", "user_id"], :name => "index_blacklisted_users_on_blocker_id_and_user_id", :unique => true
+  add_index "blacklisted_users", ["blocker_id"], :name => "index_blacklisted_users_on_blocker_id"
+  add_index "blacklisted_users", ["user_id"], :name => "index_blacklisted_users_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.string   "body"
