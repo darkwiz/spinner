@@ -58,7 +58,7 @@ end
 
 	
 
-	private
+private
 	# Checks if a spin is in reply to a user (if @ char is present)
 	
 	def get_username(txt, col = 140)
@@ -68,8 +68,6 @@ end
 	end
 
 	def spin_owner
-		#@spin = current_user.spins.find_by_id(params[:id])
-        #redirect_to(root_path) if @spin.nil?
         begin
         	@spin = current_user.spins.find(params[:id])
         rescue

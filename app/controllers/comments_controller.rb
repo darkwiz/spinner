@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 		@comment.user = current_user
 		@comment.save
 		respond_to do |format|
-			format.html { redirect_to current_user }
+			format.html { redirect_to root_url }
 			#format.js
 		end 
 end
@@ -27,6 +27,6 @@ private
         begin
         	@comment = current_user.comments.find(params[:id])	
         rescue
-        	redirect_to(root_path) if @comment.nil?
+        	redirect_to(root_url) if @comment.nil?
         end
 end

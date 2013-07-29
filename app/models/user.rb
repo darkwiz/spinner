@@ -86,13 +86,18 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.search(search)
-    if search
-      where("name LIKE ?", "%#{search}%") 
-    end
-end
+  def block!(other_user)
+      blocked_users << other_user
+  end
 
-
+  def remove_block!(other_user)
+      blocked_users.delete(other_user)
+  end
+  
+  def blocking?(other_user)
+    blocked_users.exists?(other_user)
+  end
+  
 private
   
   def generate_token(column)

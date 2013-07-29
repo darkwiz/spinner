@@ -7,7 +7,7 @@ class RespinsController < ApplicationController
  		  format.js
  	    end
 	end
-
+# Controlla se e possibile usare una variabile user(leggera) invece di @user 
 	def destroy
 		@user = Respin.find(params[:id]).respinner
 		@spin = Respin.find(params[:id]).spin

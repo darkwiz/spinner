@@ -1,21 +1,21 @@
 class RelationshipsController < ApplicationController
  before_filter :signed_in_user
+ before_filter :blocked_user, only: [:create]
 
  def create
- 	@user = User.find(params[:relationship][:followed_id])
  	current_user.follow!(@user)
- if @user.private
- 	flash.now[:success] = 'Request sent!'
- 	respond_to do |format|
- 		format.html {redirect_to @user}
- 		format.js 
+ 	if @user.private
+ 		flash.now[:success] = 'Request sent!'
+ 		respond_to do |format|
+ 			format.html { redirect_to @user }
+ 			format.js 
+ 		end
+ 	else
+ 		respond_to do |format|
+ 			format.html {redirect_to @user}
+ 			format.js
+ 		end
  	end
- else
- 	respond_to do |format|
- 		format.html {redirect_to @user}
- 		format.js
- 	end
- end
  end
 
  def destroy
@@ -39,5 +39,17 @@ class RelationshipsController < ApplicationController
  		format.js
  	end
  end
+private
 
+def blocked_user
+
+	@user = User.find(params[:relationship][:followed_id])
+	if @user.blocking?(current_user)
+		flash.now[:notice] = "You Can't follow this user, he's blocking you."
+		respond_to do |format|
+ 			format.html { redirect_to @user }
+ 			format.js 
+ 		end
+	end
+end
 end

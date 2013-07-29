@@ -4,7 +4,7 @@ Spinner::Application.routes.draw do
 
   get "password_resets/new"
 
-  resources :users
+  #resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy, :update]
   resources :respins, only: [:create, :destroy]
@@ -26,13 +26,14 @@ Spinner::Application.routes.draw do
     member do
       get :following, :followers, :pending_requests
     end
-  end
-
-
-  resources :spins, shallow: true do
-    resources :comments
+    resource :blocks, only: [:create, :destroy]
   end
   
+
+  resources :spins do
+    resources :comments, shallow: true, only: [:create, :destroy]  # create -> nested, destroy simple. See doc if have any doubt
+  end
+ 
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
