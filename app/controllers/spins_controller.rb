@@ -7,7 +7,6 @@ class SpinsController < ApplicationController
 
 	def create
 		@spin = current_user.spins.build(params[:spin])
-		@spin.in_reply_to = get_username(params[:spin][:content])
 		ok = @spin.save
 		respond_to do |format| 
 			format.html {
@@ -50,22 +49,12 @@ def update
 end
 
 def destroy
-
-		#the spin was put into @spin by the before filter spin_owner
 		@spin.destroy
 		redirect_to root_url
 end
 
 	
-
 private
-	# Checks if a spin is in reply to a user (if @ char is present)
-	
-	def get_username(txt, col = 140)
-		if txt.match(/^@([A-Za-z0-9_]{1,140})/)
-			txt.match(/^@([A-Za-z0-9_]{1,140})/)[0].gsub!(/^@/, '')
-		end
-	end
 
 	def spin_owner
         begin

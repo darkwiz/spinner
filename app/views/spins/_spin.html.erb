@@ -19,7 +19,7 @@
 						<% end %>
 				    <% spin.respinners.each do |respinner| %>
 						    <% if respinner.id == @user.id %>
-						        by <%= link_to respinner.name, respinner, class: "other" %>.
+						     |Respinned by <%= link_to respinner.name, respinner, class: "other" %>.
 							<% end %>
 					<% end %>
 					</div>

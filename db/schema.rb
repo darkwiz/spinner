@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727191921) do
+ActiveRecord::Schema.define(:version => 20130731171217) do
 
   create_table "blacklisted_users", :id => false, :force => true do |t|
     t.integer  "blocker_id"
@@ -60,9 +60,8 @@ ActiveRecord::Schema.define(:version => 20130727191921) do
   create_table "spins", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "in_reply_to"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

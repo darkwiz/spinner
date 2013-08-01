@@ -1,5 +1,4 @@
 class Spin < ActiveRecord::Base
-  attr_accessible :content, :in_reply_to
   belongs_to :user
   has_many :respins
   has_many :respinners, through: :respins, source: :respinner
@@ -13,10 +12,6 @@ class Spin < ActiveRecord::Base
     followed_user_ids = user.followed_users.approved_relationships.pluck('users.id')
     where("user_id IN (:followed_user_ids) OR user_id = :user_id",
           followed_user_ids: followed_user_ids, user_id: user).select('spins.*, spins.created_at as last_respin_time')
- end
-
- def self.including_replies(user)
-  	where("in_reply_to = ?", user.username).select('spins.*, spins.created_at as last_respin_time')
  end
 
  def self.respinned_by_followed(user)

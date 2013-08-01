@@ -48,9 +48,9 @@ class User < ActiveRecord::Base
        save!
        UserMailer.user_confirmation(self).deliver
   end
-
+  
   def timeline
-      (Spin.from_users_followed_by(self) + Spin.including_replies(self)).uniq + Spin.respinned_by_followed(self) 
+      (Spin.from_users_followed_by(self) + Spin.respinned_by_followed(self))
   end
  
   def user_spins
