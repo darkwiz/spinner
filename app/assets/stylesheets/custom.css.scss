@@ -17,6 +17,19 @@ $grayMediumLight: #eaeaea;
     background-size: cover;
 }
 
+@mixin fake_link {
+     border: none;
+     padding: 0!important;
+     vertical-align: bottom;
+     /*optional*/
+     color: #000;
+     &:hover {
+       color : #222;
+       text-decoration: underline;
+       cursor: pointer;
+     }
+}
+
 /* Sample Box */
 
 html {
@@ -255,7 +268,9 @@ aside {
     margin-bottom: 5px;
   }
 }
-
+.picture{
+  margin-bottom: 10px;
+}
 /* Comment */
 .new_comment{
   margin-top: 10px;
@@ -299,17 +314,14 @@ aside {
 /* Respin button and form */
 
 button.respin {
-     background: none!important;
-     border: none; 
-     padding: 0!important;
-     vertical-align: bottom;
-     /*optional*/
-     color: #000;
-     &:hover {
-       color : #222;
-       text-decoration: underline;
-       cursor: pointer;
-     }
+    background: none!important;
+    @include fake_link;
+     
+     
+}
+
+button.pic {
+  @include fake_link;
 }
 
 form.new_respin, .edit_respin{

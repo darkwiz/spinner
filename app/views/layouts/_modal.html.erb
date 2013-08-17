@@ -1,5 +1,5 @@
 <div id="ajax-modal" class="modal hide fade" tabindex="-1">
-  <%= form_for object ||= Spin.new, html: {id: 'new_spin_ajax'}, :remote => true do |f| %> 
+  <%= form_for object ||= Spin.new, html: {:id => 'new_spin_ajax', :multipart => true }, :remote => true do |f| %>
   <div class='modal-header'>
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3 class="modal-title">Create Spin</h3>
@@ -8,12 +8,13 @@
         
     	
     		<%= f.text_area :content, placeholder: "Compose new spin..."%>
-    	
+        <%= f.file_field :multimedia %>
+        
     	<span class="help-block">140</span>
   </div>
-  <div class='modal-footer'>
+  <div class='modal-footer'>  
     <button type="button" data-dismiss="modal" class="btn">Close</button>
-    <%= f.submit "Post", class: "btn btn-primary" %>
+    <%= f.submit "Post", class: "btn btn-primary", data: { :loading_text => "Posting..." } %>
   </div>
   <% end %>
 </div>

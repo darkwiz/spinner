@@ -94,11 +94,40 @@ $(function() {
   });
 });
 
+$(function() {
+	$('.accordion-toggle .btn-link, .accordion-toggle ').click(function(event){
+		var $button = $(this).find('button');
+		$button.html(function(i,old){
+			return old == '<i class="icon-picture"></i>Show Picture' ?  '<i class="icon-picture"></i>Hide picture' : '<i class="icon-picture"></i>Show Picture';
+		});
+	});
+});
 
 $(document).ready(reset_counter);
 
 /*
+$(function() {
+$('').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $collapse = $this.closest('.collapse-group').find('.collapse');
+    $collapse.collapse('toggle');
+});
+});
+
+
+$(function() {
+	$('#myCollapsible').on('hide', function () {
+    // do something…
+    alert('0pippo');
+	});
+});
+
 $('#myModal').modal(show);
+
+ $("button.pic").click(function () {
+      $(this).children().toggle();
+ });
 
 $('#InfroTextSubmit').click(function(){
     

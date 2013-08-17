@@ -6,8 +6,14 @@ class SpinsController < ApplicationController
 
 
 	def create
-		@spin = current_user.spins.build(params[:spin])
-		ok = @spin.save
+		
+		if params[:spin][:multimedia]
+			multispin = Multispin.new(params[:spin])
+			ok = current_user.spins << multispin
+		else
+			@spin = current_user.spins.build(params[:spin])
+			ok = @spin.save
+		end
 		respond_to do |format| 
 			format.html {
 				if ok

@@ -1,4 +1,5 @@
 <% unless timeline_item.has_attribute? :respinner_id  %>
+
 <div class="accordion" id="accordion2">
 	<div class="accordion-group">
 		<div class="accordion-heading">
@@ -15,10 +16,16 @@
 					<% else %>
 						<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 					<% end %>
-				   	</div>
+					<% if timeline_item.type %>	
+								<button class="btn btn-link pic" data-toggle="collapse" data-target="#collapse<%= timeline_item.id %>"><i class="icon-picture"></i>Show Picture</button>
+					<% end %>
 				</li>
+				
 		</div>
 		<div id="collapse<%= timeline_item.id %>" class="accordion-body collapse">
+			<div class="row-fluid">
+   			<div class="span12 pagination-centered picture"><%= image_tag timeline_item.multimedia.url(:medium), class: "img-polaroid pagination-centered" if timeline_item.type %></div>
+			</div>
 			<% if timeline_item.respinners.any? %>
 				<%= render 'shared/respin_stats', object: timeline_item if timeline_item.respinners.count > 0 %>
 			<% end %>
@@ -33,7 +40,9 @@
 		</div>
 	</div>
 </div>
+
 <% else %>
+
 <div class="accordion" id="accordion2">
 	<div class="accordion-group">
 		<div class="accordion-heading">
@@ -50,6 +59,9 @@
 						<% else %>
 							<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 						<% end %>
+						<% if timeline_item.type %>	
+								<button class="btn btn-link pic" data-toggle="collapse" data-target="#collapse<%= timeline_item.id %>"><i class="icon-picture"></i>Show Picture</button>
+						<% end %>
 					<% timeline_item.respinners.each do |respinner| %>
 							 <% if respinner.id == timeline_item.respinner_id %>
 									Respinned by <%= link_to respinner.name, respinner, class: "other" %>
@@ -59,6 +71,9 @@
 				</li>
 		</div>
 		<div id="collapse<%= timeline_item.respin_id %>" class="accordion-body collapse">
+			<div class="row-fluid">
+   					<div class="span12 pagination-centered picture"><%= image_tag timeline_item.multimedia.url(:medium), class: "img-polaroid pagination-centered" if timeline_item.type %></div>
+			</div>
 			<%= render 'shared/respin_stats', object: timeline_item if timeline_item.respinners.count > 0 %>
 			<div class="accordion-inner">
 				<% if timeline_item.comments.any? %>
@@ -70,5 +85,6 @@
 			</div>
 		</div>
 	</div>
-</div>				
+</div>	
+
 <% end %>

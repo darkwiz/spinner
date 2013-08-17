@@ -16,13 +16,6 @@ $ ->
         success: (data) ->
           response(data)  
 
--- Non strettamente necessario dovrebbe fare lo stesso dello stoppropagation() per i metodi ujs di rails -- 
-e comunque fa danni sulla timeline
-$ ->
-    $('body *').not('.accordion-toggle a, .accordion-toggle a *')
-               .click ->
-                     $('.accordion-toggle a').toggle()
-
 
 
 CoffeScript Version of create spin form with ajax
