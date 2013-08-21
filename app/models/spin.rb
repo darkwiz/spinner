@@ -31,6 +31,11 @@ class Spin < ActiveRecord::Base
       user_id: user).select('spins.*, respins.created_at as last_respin_time')
  end
 
+ def self.multimedia_spins(user) 
+   where('user_id = :user_id AND type = :spin_type',   
+      user_id: user, spin_type: 'Multispin')
+ end
+
  def respin!(user)
     respins.create!(respinner_id: user.id)
  end

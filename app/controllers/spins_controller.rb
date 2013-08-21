@@ -6,7 +6,6 @@ class SpinsController < ApplicationController
 
 
 	def create
-		
 		if params[:spin][:multimedia]
 			multispin = Multispin.new(params[:spin])
 			ok = current_user.spins << multispin

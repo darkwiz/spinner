@@ -24,7 +24,7 @@
 		</div>
 		<div id="collapse<%= timeline_item.id %>" class="accordion-body collapse">
 			<div class="row-fluid">
-   			<div class="span12 pagination-centered picture"><%= image_tag timeline_item.multimedia.url(:medium), class: "img-polaroid pagination-centered" if timeline_item.type %></div>
+   			<div class="span12 pagination-centered picture"><%= image_tag timeline_item.multimedia.url(:medium), class: "img-polaroid pagination-centered image", data: { big: "#{timeline_item.multimedia.url(:original)}" } if timeline_item.type %></div>
 			</div>
 			<% if timeline_item.respinners.any? %>
 				<%= render 'shared/respin_stats', object: timeline_item if timeline_item.respinners.count > 0 %>
@@ -72,7 +72,7 @@
 		</div>
 		<div id="collapse<%= timeline_item.respin_id %>" class="accordion-body collapse">
 			<div class="row-fluid">
-   					<div class="span12 pagination-centered picture"><%= image_tag timeline_item.multimedia.url(:medium), class: "img-polaroid pagination-centered" if timeline_item.type %></div>
+   					<div class="span12 pagination-centered picture"><%= image_tag timeline_item.multimedia.url(:medium), class: "img-polaroid pagination-centered image", data: { big: "#{timeline_item.multimedia.url(:original)}" } if timeline_item.type %></div>
 			</div>
 			<%= render 'shared/respin_stats', object: timeline_item if timeline_item.respinners.count > 0 %>
 			<div class="accordion-inner">

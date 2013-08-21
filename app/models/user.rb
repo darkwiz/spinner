@@ -53,9 +53,13 @@ class User < ActiveRecord::Base
       (Spin.from_users_followed_by(self) + Spin.respinned_by_followed(self))
   end
  
-  def user_spins
+  def personal_spins
      Spin.user_spins(self) + Spin.user_respins(self)
   end
+
+   def user_multimedia
+     Spin.multimedia_spins(self)
+   end
 
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)

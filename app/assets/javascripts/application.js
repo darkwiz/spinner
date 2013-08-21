@@ -16,29 +16,6 @@
 //= require_tree .
 //= require bootstrap
 
-var reset_counter = function() {
-    var max = 140;
-	var len = $('#spin_content').val().length;
-	len = max - len
-	$(".help-block").text(""+ len +"");
-};
-
-$(function() {
-	$('#spin_content').keyup(function () {
-		var max = 140;
-		var len = $(this).val().length;
-		if (len <= max){
-			len = max - len;
-			$(".help-block").text(""+ len +"");
-			$(".help-block").css( "color", "" );
-		} else {
-			len = max - len;
-			$(".help-block").text(""+ len +"");
-			$(".help-block").css( "color", "red" );
-		}
-		len--
-	});
-});
 
 /* Autocomplete con bootstrap-typeahead */
 
@@ -94,18 +71,65 @@ $(function() {
   });
 });
 
+// Hide-Show Picture 
+
 $(function() {
 	$('.accordion-toggle .btn-link, .accordion-toggle ').click(function(event){
-		var $button = $(this).find('button');
+		var $button = $(this).find('.btn-link');
 		$button.html(function(i,old){
 			return old == '<i class="icon-picture"></i>Show Picture' ?  '<i class="icon-picture"></i>Hide picture' : '<i class="icon-picture"></i>Show Picture';
 		});
 	});
 });
 
-$(document).ready(reset_counter);
+
+// Pretty Upload Picture 
+
+$(function() {
+	$( ".image_uploader" ).change(function() {
+		$( "#upload-file-info" ).html($(this).val())
+	});
+});
+
+
+
 
 /*
+
+$( document ).ready(function() {
+console.log( "dom loaded" );
+});
+
+
+$(document).ready(reset_counter);
+
+var reset_counter = function() {
+    var max = 140;
+	var len = $('#spin_content').val().length;
+	len = max - len
+	$(".help-block").text(""+ len +"");
+};
+
+$(function() {
+	$('#spin_content').keyup(function () {
+		var max = 140;
+		var len = $(this).val().length;
+		if (len <= max){
+			len = max - len;
+			$(".help-block").text(""+ len +"");
+			$(".help-block").css( "color", "" );
+		} else {
+			len = max - len;
+			$(".help-block").text(""+ len +"");
+			$(".help-block").css( "color", "red" );
+		}
+		len--
+	});
+});
+
+----
+
+
 $(function() {
 $('').on('click', function(e) {
     e.preventDefault();

@@ -17,6 +17,9 @@
 						   <% else %>
 						<%= render 'shared/respin_link', object: spin if signed_in? %>
 						<% end %>
+						<% if spin.type %>	
+								<button class="btn btn-link pic" data-toggle="collapse" data-target="#collapse<%= spin.id %>"><i class="icon-picture"></i>Show Picture</button>
+						<% end %>
 				    <% spin.respinners.each do |respinner| %>
 						    <% if respinner.id == @user.id %>
 						     |Respinned by <%= link_to respinner.name, respinner, class: "other" %>.
@@ -26,6 +29,9 @@
 				</li>
 			</div>
 		<div id="collapse<%= spin.id %>" class="accordion-body collapse">
+			<div class="row-fluid">
+   			<div class="span12 pagination-centered picture"><%= image_tag spin.multimedia.url(:medium), class: "img-polaroid pagination-centered image", data: { big: "#{spin.multimedia.url(:original)}" } if spin.type %></div>
+			</div>
 			<%= render 'shared/respin_stats', object: spin if spin.respinners.count > 0 %>
 			<div class="accordion-inner">
 				<% if spin.comments.any? %>

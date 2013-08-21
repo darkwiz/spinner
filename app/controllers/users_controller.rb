@@ -58,10 +58,9 @@ class UsersController < ApplicationController
   def show
     @spin = current_user.spins.build if signed_in?
   	@user = User.find(params[:id])
-    #@spins = @user.user_spins.page(params[:page])
-    #@spins = @user.spins.page(params[:page]).per(6)
-    ary = @user.user_spins.sort_by(&:last_respin_time).reverse 
+    ary = @user.personal_spins.sort_by(&:last_respin_time).reverse 
     @spins = Kaminari.paginate_array(ary).page(params[:page])
+    @multispins = @user.user_multimedia
   end
 
 

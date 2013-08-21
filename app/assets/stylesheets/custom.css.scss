@@ -320,14 +320,12 @@ button.respin {
      
 }
 
-button.pic {
-  @include fake_link;
-}
-
 form.new_respin, .edit_respin{
   margin: 0;
   display:inline
 }
+
+
 
 
 .respin-stats {
@@ -350,7 +348,7 @@ form.new_respin, .edit_respin{
   }
 }
 
-/* Accept/Reject forms buttons */
+/* Accept_Reject forms buttons */
 
 .approve-reject{
   margin: 0;
@@ -361,7 +359,7 @@ form.new_respin, .edit_respin{
   }
 }
 
-/* Respin button and form */
+/* Follow form */
 
 
 #follow_form{
@@ -369,6 +367,40 @@ form.new_respin, .edit_respin{
   margin-right: 5px;
 }
 
+/* Show_hide picture button */
+
+button.pic {
+  @include fake_link;
+}
+
+/* Prettier image uploader */
+
+.image_uploader {
+  position:absolute;
+  z-index:2;
+  top:0;
+  left:0;
+  filter: alpha(opacity=0);
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity:0;
+  background-color:transparent;
+  color:transparent;
+}
+
+.image{
+  cursor: pointer;
+}
+
+.modal-image {
+  display: block;
+  position: relative;
+  height: 80%;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
 /* miscellaneous */
 
 .debug_dump {

@@ -8,6 +8,20 @@
             <%= render 'shared/request_notifications' %>         
       <% end %>
     </section>
+    <section>
+      <div class="row-fluid">
+     <h5><%= "#{@user.username}" %>'s pictures</h5>
+        <ul class="thumbnails">
+        <% @multispins[0..9].each_with_index do |img, index| %>  
+          <li class="span4">
+            <div class="thumbnail">
+              <%= image_tag img.multimedia.url(:medium), data: { big: "#{img.multimedia.url(:original)}", num:"#{index}" }, class: 'carousel-image' %>
+            </div>
+          </li> 
+        <% end %>
+        </ul>
+      </div>
+    </section>
   </aside>
 </div>
 
@@ -15,21 +29,21 @@
 <%- content_for :body do -%>
 
 <%= render 'shared/user_profile_card' %>  
-
 <div class="span8 well">
-<% if ( @user.private && !current_user.can_see?(@user) ) || ( !@user.private && @user.blocking?(current_user) )%>
- <h5><%= "#{@user.username}" %>'s spins are protected and just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.
- <% else %>
- </h5>
-  <% if @user.spins.any? %>
-    <h3>Spins (<%= @user.spins.count %>)</h3>
-    <ol class="spins">
-     <%= render @spins %>
-    </ol>
-     <%= paginate @spins %>
-  <% else %>
-     <h5>No spins here!</h5>
+    <% if ( @user != current_user) && ( @user.private && !current_user.can_see?(@user) ) || ( !@user.private && @user.blocking?(current_user) )%>
+    <h5><%= "#{@user.username}" %>'s spins are protected and just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.
+    <% else %>
+    </h5>
+    <% if @user.spins.any? %>
+      <h3>Spins (<%= @user.spins.count %>)</h3>
+      <ol class="spins">
+        <%= render @spins %>
+      </ol>
+        <%= paginate @spins %>
+    <% else %>
+ <h5>No spins here!</h5>
+    <% end %>
   <% end %>
-<% end %>
+
 </div>
 <%- end -%>

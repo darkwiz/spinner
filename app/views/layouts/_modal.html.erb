@@ -7,12 +7,19 @@
   <div class='modal-body'>
         
     	
-    		<%= f.text_area :content, placeholder: "Compose new spin..."%>
-        <%= f.file_field :multimedia %>
+    		<%= f.text_area :content, placeholder: "Compose new spin..." %>
         
     	<span class="help-block">140</span>
   </div>
   <div class='modal-footer'>  
+    <div style="position:relative;" class="pull-left">
+          <a class='btn' href='javascript:;'>
+            Choose File...
+            <%= f.file_field :multimedia , class: "image_uploader"  %>
+          </a>
+          &nbsp;
+          <span class='label label-info' id="upload-file-info"></span>
+        </div>
     <button type="button" data-dismiss="modal" class="btn">Close</button>
     <%= f.submit "Post", class: "btn btn-primary", data: { :loading_text => "Posting..." } %>
   </div>
