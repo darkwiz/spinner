@@ -4,6 +4,10 @@ $(modal).replaceWith('<%= escape_javascript(render('layouts/modal', object: @spi
 
 $('.modal-title:last-child').html("Edit Spin");
 
+<% unless @spin.type %>
+	$('.image_uploader').closest('div.pull-left').remove();
+<% end %>
+
 $(modal).modal('show');
 
 $(modal).on('hidden', function(){

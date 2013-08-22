@@ -14,27 +14,20 @@ class SpinsController < ApplicationController
 			ok = @spin.save
 		end
 		respond_to do |format| 
-			format.html {
-				if ok
-					flash[:success] = "Spin created!"
-					redirect_to root_url
-				else
-					@spin = current_user.spins.build 
-					@timeline_items = current_user.timeline.page(params[:page])
-					render 'spinner/home'
-				end
-			}
-			format.js {
-				if ok
-					render 'create'
-				else
-
-				end
-			}
+			if ok
+				format.html { flash[:success] = "Spin created!"
+					      redirect_to root_url }
+		    	format.js	
+			else
+				format.html { @timeline_items = []
+					    	  render 'spinner/home' }
+				format.js { render :nothing => true }
+			end
 		end
 	end
 
-	def edit
+
+   def edit
 		@spin = current_user.spins.find(params[:id])
 		respond_to do |format|
 			format.js
@@ -42,20 +35,28 @@ class SpinsController < ApplicationController
 	end
 
 
-def update
-  @spin = Spin.find(params[:id])
-  respond_to do |format|
-    if @spin.update_attributes(params[:spin])
-      format.js 
-    else
-      redirect_to current_user
-    end
-  end
-end
+	def update
+		@spin = Spin.find(params[:id])
+		ok = @spin.update_attributes(params[:spin])
+		respond_to do |format|
+			if ok 
+				format.html { flash[:success] = "Spin updated!"
+				      		  redirect_to current_user }
+				format.js 
+			else  
+				format.html { flash[:error] = "Spin update failed!"
+							  redirect_to current_user }  
+				format.js  
+			end  
+		end
+	end
 
 def destroy
 		@spin.destroy
-		redirect_to root_url
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.js { render :nothing => true }
+		end
 end
 
 	
