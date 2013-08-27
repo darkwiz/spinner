@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802173613) do
+ActiveRecord::Schema.define(:version => 20130825144734) do
 
   create_table "blacklisted_users", :id => false, :force => true do |t|
     t.integer  "blocker_id"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(:version => 20130802173613) do
     t.string   "multimedia_content_type"
     t.integer  "multimedia_file_size"
     t.datetime "multimedia_updated_at"
+  end
+
+  create_table "styles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "well_color"
+    t.string   "background_color"
+    t.boolean  "nav_inverse",      :default => true
+    t.string   "background_image"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,15 @@
+body.no_homepage { 
+background-color: <%= @style.background_color %>;
+<% if @style.background_image %>
+<% item_id = "backgrounds/" + @style.background_image.to_s %>
+	background-image: url(<%= asset_path(item_id) %>);
+	background-position: center top;
+	background-repeat: no-repeat;
+	-moz-background-size: cover;
+        -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+<% end %>
+ }
+
+.well{ background-color: <%= @style.well_color %>; }

@@ -33,6 +33,12 @@ Spinner::Application.routes.draw do
   resources :spins do
     resources :comments, shallow: true, only: [:create, :destroy]  # create -> nested, destroy simple. See doc if have any doubt
   end
+
+  resources :styles do
+    member do
+        get :show, :format => :css
+    end
+  end
  
   
   # The priority is based upon order of creation:

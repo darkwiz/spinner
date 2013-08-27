@@ -14,8 +14,10 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   has_and_belongs_to_many :blocked_users, :class_name => "User", :join_table => "blacklisted_users", :foreign_key => "blocker_id"
+  has_one :style
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
+
 
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -28,6 +30,8 @@ class User < ActiveRecord::Base
 
   scope :pending_requests, lambda { Relationship.pending }
   scope :approved_relationships, lambda { Relationship.approved }
+  scope :public, -> { where(private: false) } # new syntax
+
 
   def should_validate_password?
     updating_password || new_record?
@@ -101,6 +105,16 @@ class User < ActiveRecord::Base
   def blocking?(other_user)
     blocked_users.exists?(other_user)
   end
+
+  def self.search(query)
+  if query.blank?
+      scoped
+    else
+      q = "%#{query}%"
+      where("username like ?", q)
+  end
+end
+
   
 private
   

@@ -19,14 +19,11 @@ class UsersController < ApplicationController
   # methods page() and per(number_of_occurences in a page)
 
   def index
-    
-    
     if params[:search]
          @users = User.search(params[:search]).page(params[:page])
       else
          @users = User.page(params[:page])
       end
-      
   end
 
   # If the user is already logged in, and if is the correct user this method gives the user the ability
@@ -113,7 +110,7 @@ class UsersController < ApplicationController
       @users = @user.followers.pending_requests.page(params[:page])
       render 'show_follow'
     else
-      redirect_to @user
+      render 'show'
     end
   end
 

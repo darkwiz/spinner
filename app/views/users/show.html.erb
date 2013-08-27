@@ -9,7 +9,7 @@
       <% end %>
     </section>
     <section>
-    <% unless ( @user != current_user) && ( @user.private && !current_user.can_see?(@user) ) || ( !@user.private && @user.blocking?(current_user) )  %>
+    <% if allowing?(@user) %>
       <div class="row-fluid">
      <h5><%= "#{@user.username}" %>'s pictures</h5>
         <ul class="thumbnails">
@@ -32,7 +32,7 @@
 
 <%= render 'shared/user_profile_card' %>  
 <div class="span8 well">
-    <% if ( @user != current_user) && ( @user.private && !current_user.can_see?(@user) ) || ( !@user.private && @user.blocking?(current_user) ) %>
+   <% unless allowing?(@user) %>
     <h5><%= "#{@user.username}" %>'s spins are protected and just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.
     <% else %>
     </h5>

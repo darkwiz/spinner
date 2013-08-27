@@ -16,21 +16,33 @@
 </div>
 <%- end -%>
 <%- content_for :body do -%>
-<% provide(:title, "Edit user") %> 
+<% provide(:title, "Edit user style") %> 
 
   <div class="span8 well">
-    <h2>Update your profile</h2>
+    <h2>Customize your profile</h2>
 
-    <%= form_for(@user) do |f| %>
+    <%= form_for @style  do |f| %>
 
-      <%= render 'shared/form_fields', f: f %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= f.label :well_color %>
+    <%= f.text_field :well_color %>
+
+    <%= f.label :background_color %>
+    <%= f.text_field :background_color %> 
+
+    <%= f.label :background_image %>
+    <%= f.select :background_image, @pic, :selected => @style.background_image, :include_blank => true %>
+    
+    <div class="field">
+      <%= f.check_box :nav_inverse %>
+      <%= label_tag :nav_inverse , "Invert navbar color"%>
+    </div>
 
       <%= f.submit "Save Changes", class: "btn btn-primary" %>
 
     <% end %>
 
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails">change</a>
-
+<div id="colorpicker"></div>
 </div>
 <%- end -%>

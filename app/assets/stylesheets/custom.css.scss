@@ -41,7 +41,7 @@ body.no_homepage {
 }
 
 body.homepage {
-  background: url('/assets/background_login.jpg');
+  background: asset-url("backgrounds/background_login.jpg", image);
   padding-top: 60px;
   background-repeat: no-repeat;
   @include background_sizing;
@@ -401,6 +401,10 @@ button.pic {
   margin-top: 10%;
   margin-bottom: 10%;
 }
+/* Select Background */
+
+#style_background_image{ padding:0;}
+
 /* miscellaneous */
 
 .debug_dump {
