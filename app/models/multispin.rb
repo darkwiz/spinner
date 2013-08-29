@@ -6,9 +6,9 @@ class Multispin < Spin
 	validates_attachment_content_type :multimedia, 
                                     :content_type => /^image\/(png|gif|jpeg|jpg)/
   		
-	def self.model_name
-		Spin.model_name
-	end
+	# def self.model_name
+	# 	Spin.model_name
+	# end
 
 	def to_partial_path
 		'spins/spin'

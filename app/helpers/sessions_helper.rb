@@ -2,7 +2,7 @@ module SessionsHelper
   # Sets the permanent cookie (20yr) taking as value the user remember
   # token, furthermore sets the current_user variable
   
-	def sign_in(user,option = true)
+	def sign_in_user(user,option = true)
     if option
       cookies.permanent[:remember_token] = user.remember_token
     else
@@ -49,7 +49,7 @@ module SessionsHelper
 
   # Signout function sets the curent user to nil and deletes the cookie remeber_token
 
-   def sign_out
+   def sign_out_user
     self.current_user = nil
     cookies.delete(:remember_token)
   end

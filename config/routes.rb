@@ -1,5 +1,10 @@
 Spinner::Application.routes.draw do
 
+  root to: 'spinner#home'
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   get "user_confirmations/new"
 
   get "password_resets/new"
@@ -10,8 +15,6 @@ Spinner::Application.routes.draw do
   resources :respins, only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update] 
   resources :user_confirmations, only: [:new, :show]
-
-  root to: 'spinner#home'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

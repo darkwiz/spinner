@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password]) && user.confirmed_user?
-      sign_in(user, params[:remember_me])
+      sign_in_user(user, params[:remember_me])
       redirect_back_or user
     elsif user && user.authenticate(params[:session][:password])
       flash.now[:error] = 'Your account has not been activated yet, please check your email.'
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
   # and redirects the user to the signin/signup page
 
 	def destroy
-    sign_out
+    sign_out_user
     redirect_to root_url
   end
 end

@@ -48,6 +48,17 @@ class Spin < ActiveRecord::Base
     respins.find_by_respinner_id(user.id)
   end
 
+  # Allow Children To Use Their Parent’s Routes
+
+  def self.inherited(child)
+    child.instance_eval do
+      def model_name
+        Spin.model_name
+      end
+    end
+    super
+  end
+
 =begin
  def self.including_respins(user)
      followed_user_ids = user.followed_user_ids

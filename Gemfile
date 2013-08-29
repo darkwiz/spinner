@@ -25,13 +25,18 @@ group :development do
   gem 'annotate', '2.5.0'
 end
 
+# To use pagination
 gem 'kaminari', '~> 0.14.1'
 
 gem 'jquery-ui-rails'
 
 gem 'jquery-rails'
 
+# To handle file attachements
 gem "paperclip", "~> 3.0"
+
+# Backend
+gem 'activeadmin'
 
 
 # To use ActiveModel has_secure_password
