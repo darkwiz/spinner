@@ -12,8 +12,14 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password]) && user.confirmed_user?
-      sign_in_user(user, params[:remember_me])
-      redirect_back_or user
+      if user.banned?
+        sign_out_user
+        flash[:error] = "This account has been suspended for violating terms of conditions."
+        redirect_to root_url
+      else
+        sign_in_user(user, params[:remember_me])
+        redirect_back_or user
+      end
     elsif user && user.authenticate(params[:session][:password])
       flash.now[:error] = 'Your account has not been activated yet, please check your email.'
       render 'new'

@@ -12,7 +12,7 @@ class RelationshipsController < ApplicationController
  		end
  	else
  		respond_to do |format|
- 			format.html {redirect_to @user}
+ 			format.html { redirect_to @user }
  			format.js
  		end
  	end
@@ -27,7 +27,7 @@ class RelationshipsController < ApplicationController
  			current_user.reject!(@user)
  		end
  		respond_to do |format|
- 		format.html {redirect_to @user}
+ 		format.html { redirect_to @user }
  		format.js
  	end
  end

@@ -1,6 +1,6 @@
 body.no_homepage { 
 background-color: <%= @style.background_color %>;
-<% if @style.background_image %>
+<% unless @style.background_image.empty? %>
 <% item_id = "backgrounds/" + @style.background_image.to_s %>
 	background-image: url(<%= asset_path(item_id) %>);
 	background-position: center top;

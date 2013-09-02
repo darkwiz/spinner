@@ -14,6 +14,7 @@
 					<% if current_user?(timeline_item.user) %>
 						<%= render 'shared/delete_link', object: timeline_item %>
 					<% else %>
+						<%= link_to '<i class="icon-flag"></i>Report Spin'.html_safe, new_report_path(:reported_id => timeline_item.id, :type => "ReportSpin"), remote: true, class: 'report generic' %>
 						<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 					<% end %>
 					<% if timeline_item.type %>	
@@ -57,6 +58,7 @@
 						<% if current_user?(timeline_item.user) %>
 							<%= render 'shared/delete_link', object: timeline_item %>
 						<% else %>
+							<%= link_to '<i class="icon-flag"></i>Report Spin'.html_safe, new_report_path(:reported_id => timeline_item.id, :type => "ReportSpin"), remote: true, class: 'report generic' %>
 							<%= render 'shared/respin_link', object: timeline_item  if signed_in? %>
 						<% end %>
 						<% if timeline_item.type %>	

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828101147) do
+ActiveRecord::Schema.define(:version => 20130830143401) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -79,6 +79,17 @@ ActiveRecord::Schema.define(:version => 20130828101147) do
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
+  create_table "reports", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.string   "type"
+    t.integer  "reported_user_id"
+    t.integer  "reported_spin_id"
+    t.integer  "reported_comment_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "respins", :force => true do |t|
     t.integer  "respinner_id"
     t.integer  "spin_id"
@@ -127,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20130828101147) do
     t.string   "user_confirm_token"
     t.datetime "user_confirm_sent_at"
     t.boolean  "private",                :default => false
+    t.boolean  "banned",                 :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

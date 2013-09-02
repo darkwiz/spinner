@@ -18,6 +18,7 @@
                   <% else %>
                   <li><%= link_to "Remove User Block", user_blocks_path(@user), :method => :delete %></li>
                   <% end %>
+                  <li><%= link_to 'Report User', new_report_path(:reported_id => @user.id, :type => "ReportUser"), remote: true %></li>
             		</ul>
             	</div>
              <div class="span2"><%= render 'follow_form' if signed_in? %></div>

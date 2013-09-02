@@ -1,9 +1,10 @@
 class Spin < ActiveRecord::Base
-  attr_accessible :content
+  attr_accessible :content, :as => [:default, :admin]
   belongs_to :user
   has_many :respins
   has_many :respinners, through: :respins, source: :respinner
   has_many :comments, dependent: :destroy
+  has_many :reports, foreign_key: "reported_spin_id"
   validates :content, presence: true, length: { maximum: 140 }
   validates :user_id, presence: true
  
@@ -59,13 +60,9 @@ class Spin < ActiveRecord::Base
     super
   end
 
-=begin
- def self.including_respins(user)
-     followed_user_ids = user.followed_user_ids
-     respinned_spin_ids = user.respinned_spin_ids
-     where("user_id IN (:followed_user_ids) AND id = :id ",
-          followed_user_ids: followed_user_ids, id: respinned_spin_ids)
- end 
-=end
+  #Active Admin filter select
+  def display_name
+     "#{id}"
+   end
 
 end

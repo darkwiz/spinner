@@ -1,0 +1,26 @@
+<div id="ajax-modal" class="modal hide fade" tabindex="-1">
+  <%= form_for @report do |f| %>
+  <div class='modal-header'>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 class="modal-title">Report <%= h(object.class.name) %></h3>
+  </div>
+  <div class='modal-body'>
+        <% if object.class.name == "Spin" %>
+          <div><%= f.hidden_field :reported_spin_id , :value => object.id %></div>
+        <% elsif object.class.name == "User" %>
+          <div><%= f.hidden_field :reported_user_id , :value => object.id %></div>
+        <% else %>
+          <div><%= f.hidden_field :reported_comment_id , :value => object.id %></div>
+        <% end %>
+        <div><%= hidden_field_tag :type, @report.type %></div>
+
+    		<%= f.text_area :content, placeholder: "Reason..." %>
+        
+    	<span class="help-block">140</span>
+  </div>
+  <div class='modal-footer'>  
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <%= f.submit "Report", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

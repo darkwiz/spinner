@@ -5,7 +5,12 @@
 	<span class="timestamp">
 		Posted <%= time_ago_in_words(comment.created_at) %> ago.
 	</span>
+	<% if current_user?(comment.user) %>
 	<%= render 'shared/delete_link', object: comment %>
+	<% else %>
+	<%= link_to '<i class="icon-flag"></i>Report Comment'.html_safe, new_report_path(:reported_id => comment.id, :type => "ReportComment"), remote: true, class: 'report generic' %>
+	<% end %>
+	
 </li>
 
 

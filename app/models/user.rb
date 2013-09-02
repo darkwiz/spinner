@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :username, :confirmed_user, :private
-  attr_accessor :updating_password
+  attr_accessible :name, :email, :password, :password_confirmation, :username, :confirmed_user, :private, :as => [:default, :admin] #:password_confirmation da eliminare
+  attr_accessible :banned , :as => :admin # devise allows admin mass-assignment
+  attr_accessor :updating_password  
 
   has_secure_password
   has_many :spins, dependent: :destroy # spins should be destroyed along with the user
@@ -15,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
   has_and_belongs_to_many :blocked_users, :class_name => "User", :join_table => "blacklisted_users", :foreign_key => "blocker_id"
   has_one :style
+  has_many :reports, foreign_key: "reported_user_id"
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
@@ -30,7 +32,7 @@ class User < ActiveRecord::Base
 
   scope :pending_requests, lambda { Relationship.pending }
   scope :approved_relationships, lambda { Relationship.approved }
-  scope :public, -> { where(private: false) } # new syntax
+  #scope :public, -> { where( private: false ) }
 
 
   def should_validate_password?

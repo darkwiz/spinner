@@ -1,0 +1,11 @@
+var modal       =   '#ajax-modal'
+
+$(modal).replaceWith('<%= j render(:partial => 'modal_report', :locals => {:object => @object}) %>')
+
+$(modal).modal('show');
+
+$(modal).on('hidden', function(){
+	$(this).replaceWith('<%= escape_javascript(render('layouts/modal')) %>');
+	$("#new_spin_ajax").val('');
+});
+

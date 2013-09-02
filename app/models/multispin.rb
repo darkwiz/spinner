@@ -1,5 +1,5 @@
 class Multispin < Spin
-	attr_accessible :multimedia
+	attr_accessible :multimedia, :as => [:default, :admin]
 	has_attached_file :multimedia, :styles => { :medium => "300x300#", :thumb => "100x100#", :big => "500x500#" }, :default_url => "/images/:style/missing.png"
 	validates_attachment_presence :multimedia
 
