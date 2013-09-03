@@ -1,13 +1,12 @@
 <footer class="footer">
   <small>
-    <a href="http://spinner.fake.org/">Spin app</a>
-    by Matteo Gentile
+    <a href="http://spinner.fake.org/">Spin app</a> <%= t('.creator') %>
   </small>
   <nav>
     <ul>
-      <li><%= link_to "About",   '#' %></li>
-      <li><%= link_to "Contact", '#' %></li>
-      <li><a href="http://spinner.fake.org/">Fake</a></li>
+      <li><a href="#"><%= t('.about') %></a></li>
+      <li><a href="#"><%= t('.contact') %></a></li>
+      <li><a href="#">Fake</a></li>
     </ul>
   </nav>
 </footer>

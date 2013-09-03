@@ -6,7 +6,9 @@
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<%= render 'layouts/shim' %>
-	<link href="<%= style_path( current_user.style ) if signed_in? %>" rel="stylesheet" type="text/css" />
+	<% if signed_in? %>
+		<link href="<%= h(style_path( current_user.style )) %>" rel="stylesheet" type="text/css" />
+	<% end %>
 
 </head>
 <body class='<%= body_class %>'>

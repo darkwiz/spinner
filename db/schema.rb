@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830143401) do
+ActiveRecord::Schema.define(:version => 20130902092456) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -115,12 +115,12 @@ ActiveRecord::Schema.define(:version => 20130830143401) do
 
   create_table "styles", :force => true do |t|
     t.integer  "user_id"
-    t.string   "well_color"
-    t.string   "background_color"
+    t.string   "well_color",       :default => "#eeeeee"
+    t.string   "background_color", :default => "#ffffff"
     t.boolean  "nav_inverse",      :default => true
-    t.string   "background_image"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.string   "background_image", :default => ""
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -131,7 +131,6 @@ ActiveRecord::Schema.define(:version => 20130830143401) do
     t.string   "password_digest"
     t.string   "username"
     t.string   "remember_token"
-    t.boolean  "admin",                  :default => false
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.boolean  "confirmed_user",         :default => false

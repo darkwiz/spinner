@@ -1,6 +1,12 @@
 Spinner::Application.routes.draw do
-
+scope '(:locale)' do
   root to: 'spinner#home'
+  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signin',  to: 'sessions#new'
+  match '/signup',  to: 'users#new'
+  match '/help' , to: 'spinner#help'
+  resources :sessions, only: [:new, :create, :destroy]
+end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -9,17 +15,12 @@ Spinner::Application.routes.draw do
 
   get "password_resets/new"
 
-  #resources :users
-  resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy, :update]
   resources :respins, only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update] 
   resources :user_confirmations, only: [:new, :show]
 
-  match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete # via DELETE (like POST,GET..)
-  match '/help' , to: 'spinner#help'
+
 
   resources :tags, only: [] do
     get :autocomplete_tag_name, :on => :collection
@@ -37,9 +38,10 @@ Spinner::Application.routes.draw do
     resources :comments, shallow: true, only: [:create, :destroy]  # create -> nested, destroy simple. See doc if have any doubt
   end
 
-  resources :styles do
+  resources :styles , only: [:edit, :update] do
     member do
         get :show, :format => :css
+        put :reset
     end
   end
  

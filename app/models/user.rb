@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   has_and_belongs_to_many :blocked_users, :class_name => "User", :join_table => "blacklisted_users", :foreign_key => "blocker_id"
-  has_one :style
   has_many :reports, foreign_key: "reported_user_id"
+  has_one :style
+  before_create :build_default_style
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
@@ -131,5 +132,19 @@ private
   def create_remember_token
      self.remember_token = SecureRandom.urlsafe_base64
   end
+
+  def build_default_style
+  # build default style instance. Will use default params.
+  # The foreign key to the owning User model is set automatically
+  build_style
+  true # Always return true in callbacks as the normal 'continue' state
+       # Assumes that the default_profile can **always** be created.
+       # or
+       # Check the validation of the style. If it is not valid, then
+       # return false from the callback. Best to use a before_validation 
+       # if doing this. View code should check the errors of the child.
+       # Or add the child's errors to the User model's error array of the :base
+       # error item
+end
 
 end

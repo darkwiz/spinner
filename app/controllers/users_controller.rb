@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following , :followers]
   before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user, only: :destroy
 
 
   # If the user is already logged in this method performs the redirect to the current user page 
@@ -75,19 +74,6 @@ class UsersController < ApplicationController
     end
   end
   
-  # Delete a User from the application(method reserved to the admin user)
-
-  def destroy
-    user = User.find(params[:id])
-    unless user.admin?
-        user.destroy
-        flash[:success] = "User deleted"
-        redirect_to users_url
-      else
-        redirect_to users_url , :notice => "Cannot Delete Admin!"
-      end
-  end
-
 
   def following
     @title = "Following"
@@ -116,7 +102,6 @@ class UsersController < ApplicationController
 
   private
 
-
  # Method that checks whether the user is the correct one (i.e.: editing his just his own profile and not other profiles)
  # if he's not the user will be redirected to the root_path
 
@@ -127,13 +112,4 @@ class UsersController < ApplicationController
   end
 
 
- # Checks what kind of user is attempting to destroy another user
- # and allows this action if the user is the admin, otherwise redirects the user to the root_url
-
-
-  def admin_user #:doc:
-    unless current_user.admin?
-      redirect_to root_path
-    end
-  end
 end

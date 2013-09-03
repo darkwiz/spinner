@@ -38,10 +38,10 @@
       <%= f.check_box :nav_inverse %>
       <%= label_tag :nav_inverse , "Invert navbar color"%>
     </div>
-
+      <%= link_to 'Reset', reset_style_path(current_user), class: "btn ", method: :put %>
       <%= f.submit "Save Changes", class: "btn btn-primary" %>
-
     <% end %>
+   
 
 <div id="colorpicker"></div>
 </div>

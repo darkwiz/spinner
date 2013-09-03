@@ -1,11 +1,10 @@
 class StylesController < ApplicationController
-  before_filter :image_list,   only: [:edit, :update]
-  caches_page :show # magic happens here (requested only when css modified)
+  before_filter :image_list, except: :show
+  #caches_page :show
 
   def show
     @style = Style.find(params[:id])
     respond_to do |format|
-      format.html #regular ERB template
       format.css #{ render :text => @style.well_color, :content_type => "text/css" }
     end
   end
@@ -24,6 +23,19 @@ class StylesController < ApplicationController
       render 'edit'
     end
   end
+
+  def reset
+    @style = Style.find(params[:id])
+    if @style.update_attributes(:well_color => "#eeeeee", :background_color =>"#ffffff", :nav_inverse => true, :background_image => "")
+      flash[:success] = "Profile Restored"
+      redirect_to edit_style_path(@style)
+    else
+      flash[:error] = "Error"
+      render 'edit'
+    end
+  end
+
+
 
   private
 

@@ -39,4 +39,6 @@ Spinner::Application.configure do
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
+  config.i18n.available_locales = [:en, :it]
+
 end

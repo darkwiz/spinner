@@ -9,7 +9,7 @@
 
 						<span class="content"><%= wrap_text(spin.content) %></span>
 						<span class="timestamp">
-							Posted <%= time_ago_in_words(spin.created_at) %> ago.
+							<%= t('.posted') %> <%= time_ago_in_words(spin.created_at) %> <%= t('.ago') %>.
 						</span>
 						<% if current_user?(spin.user) %>
 						  	 <%= render 'shared/delete_link', object: spin %>
