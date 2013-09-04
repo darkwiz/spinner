@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
   has_and_belongs_to_many :blocked_users, :class_name => "User", :join_table => "blacklisted_users", :foreign_key => "blocker_id"
   has_many :reports, foreign_key: "reported_user_id"
+  has_many :reports
   has_one :style
   before_create :build_default_style
   before_save { |user| user.email = email.downcase }

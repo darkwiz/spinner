@@ -6,11 +6,11 @@
 
 <%- content_for :body do -%>
 <div class="span6 offset2">
-  <h3>Or Sign up</h3>
+  <h3><%= t('.sign_up') %></h3>
   <%= form_for(@user) do |f| %>
 
   <%= render 'shared/form_fields', f: f %>
-  <%= f.submit "Create Account", class: "btn btn-primary" %>
+  <%= f.submit t('.create_account'), class: "btn btn-primary" %>
 
   <% end %>
 </div>

@@ -14,12 +14,11 @@
 <body class='<%= body_class %>'>
 	<div class="container">
 		<div id="mainbar">
-
 			<div class="navbar <% if signed_in? %> <%= nav_inverse %> <% else %> navbar-inverse <% end %> navbar-fixed-top">
 				<div class="navbar-inner">
 					<div class="container">
-						<%= link_to "spin", root_url , :class => "brand", id: "logo" %>
-						<%= render 'layouts/navbar' %>
+					   <%= link_to "spin", root_path , :class => "brand", id: "logo" %>
+					   <%= render 'layouts/navbar' %>
 					</div>
 				</div>
 			</div>

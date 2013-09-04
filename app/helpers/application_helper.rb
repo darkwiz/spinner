@@ -14,7 +14,7 @@ module ApplicationHelper
     # Sets the body "class" attribute in order to differentiate the backgrounds
     
 	def body_class
-		!signed_in? && current_page?('/') ? "homepage" : "no_homepage"
+		!signed_in? ? "homepage" : "no_homepage"
 	end
 
 end

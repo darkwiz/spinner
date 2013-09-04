@@ -1,12 +1,24 @@
 Spinner::Application.routes.draw do
-scope '(:locale)' do
-  root to: 'spinner#home'
-  match '/signout', to: 'sessions#destroy', via: :delete
-  match '/signin',  to: 'sessions#new'
-  match '/signup',  to: 'users#new'
-  match '/help' , to: 'spinner#help'
-  resources :sessions, only: [:new, :create, :destroy]
-end
+  scope "(:locale)", locale: /en|it/  do
+    match '/:locale' => 'spinner#home'
+
+    root to: 'spinner#home'
+
+    resources :users do
+      member do
+       get :following, :followers, :pending_requests
+     end
+     resource :blocks, only: [:create, :destroy]
+   end
+
+   resources :sessions, only: [:new, :create, :destroy]
+
+   match '/signout', to: 'sessions#destroy', via: :delete
+   match '/signin',  to: 'sessions#new'
+   match '/signup',  to: 'users#new'
+   match '/help' , to: 'spinner#help'
+
+ end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -15,24 +27,21 @@ end
 
   get "password_resets/new"
 
+  #resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy, :update]
   resources :respins, only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update] 
   resources :user_confirmations, only: [:new, :show]
 
-
+  # match '/signout', to: 'sessions#destroy', via: :delete
+  # match '/signin',  to: 'sessions#new'
+  # match '/signup',  to: 'users#new'
+  # match '/help' , to: 'spinner#help'
+  
 
   resources :tags, only: [] do
     get :autocomplete_tag_name, :on => :collection
   end
-
-  resources :users do
-    member do
-      get :following, :followers, :pending_requests
-    end
-    resource :blocks, only: [:create, :destroy]
-  end
-  
 
   resources :spins do
     resources :comments, shallow: true, only: [:create, :destroy]  # create -> nested, destroy simple. See doc if have any doubt

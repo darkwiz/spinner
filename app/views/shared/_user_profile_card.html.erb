@@ -6,11 +6,12 @@
  
   	<div class="row-fluid">
              <div class="span5"><%= render 'shared/user_stats' %></div>
-          	 <% unless current_user?(@user)%>
+          	<% if signed_in? %>
+             <% unless current_user?(@user)%>
             	<div class="span3 offset2 btn-group">
             		<a class="btn dropdown-toggle pull-right" data-toggle="dropdown" href="#">
             			Other actions
-            			<span class="caret"></span>
+            	   <span class="caret"></span>
             		</a>
             		<ul class="dropdown-menu">
                   <% unless current_user.blocking?(@user) %>
@@ -21,10 +22,10 @@
                   <li><%= link_to 'Report User', new_report_path(:reported_id => @user.id, :type => "ReportUser"), remote: true %></li>
             		</ul>
             	</div>
-             <div class="span2"><%= render 'follow_form' if signed_in? %></div>
+             <div class="span2"><%= render 'follow_form' %></div>
         	 <% end %> 
+        <% end %> 
     </div> 
-        
-        </div>
+  </div>
 
    

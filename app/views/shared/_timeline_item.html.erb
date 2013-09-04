@@ -9,7 +9,7 @@
 						<%= link_to timeline_item.user.name, timeline_item.user, class: "other" %>
 					<span class="content"><%= wrap_text(timeline_item.content) %></span>
 					<span class="timestamp">
-						Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
+						<%= t('.posted') %> <%= time_ago_in_words(timeline_item.created_at) %> <%= t('.ago') %>.
 					</span>
 					<% if current_user?(timeline_item.user) %>
 						<%= render 'shared/delete_link', object: timeline_item %>
@@ -53,7 +53,7 @@
 						 <%= link_to timeline_item.user.name, timeline_item.user, class: "other" %>
 					<span class="content"><%= wrap_text(timeline_item.content) %></span>
 					<span class="timestamp">
-						Posted <%= time_ago_in_words(timeline_item.created_at) %> ago.
+						<%= t('.posted') %> <%= time_ago_in_words(timeline_item.created_at) %> <%= t('.ago') %>.
 					</span>
 						<% if current_user?(timeline_item.user) %>
 							<%= render 'shared/delete_link', object: timeline_item %>

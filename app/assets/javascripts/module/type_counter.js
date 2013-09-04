@@ -16,13 +16,14 @@ var mySpinCounter = {
     mySpinCounter.max = mySpinCounter.config.max;
     mySpinCounter.$counter = $(mySpinCounter.config.counter_num);
     mySpinCounter.$wrapper = $(mySpinCounter.config.wrapper);
-
+    // there's at least one matching element
+       if(mySpinCounter.$wrapper.length) {
       // call other functions
       mySpinCounter.prepareToSpin(mySpinCounter.$wrapper);
       mySpinCounter.$wrapper.focusin(mySpinCounter.focusHandler);
       mySpinCounter.$wrapper.focusout(mySpinCounter.stopTyping);
-
-    },
+    }
+  },
 
     prepareToSpin: function(textArea)
     {
@@ -70,7 +71,5 @@ var mySpinCounter = {
     }
 
   };
-
-
-  $( document ).ready(function() { mySpinCounter.init(); });
+  $( document ).ready(function() { mySpinCounter.init( )});
 

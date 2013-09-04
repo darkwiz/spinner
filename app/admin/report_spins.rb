@@ -18,7 +18,7 @@ ActiveAdmin.register ReportSpin , :as => "Reported Spins" do
         row :id
         row ("Reported By") { |report| link_to report.user.name, admin_user_path(report.user) }
         row :content
-        row ("Reported Spin") { |report| link_to report.spin.id, admin_spin_path(report.comment) }
+        row ("Reported Spin") { |report| link_to report.spin.id, admin_spin_path(report.spin) }
         row :created_at
         row :updated_at
       end

@@ -13,9 +13,9 @@
 						</span>
 						<% if current_user?(spin.user) %>
 						  	 <%= render 'shared/delete_link', object: spin %>
-						     <%= link_to '<i class="icon-edit"></i>Edit'.html_safe, edit_spin_path(spin), remote: true, class: 'edit generic'  %> 
+						     <%= link_to '<i class="icon-edit"></i>Edit'.html_safe , edit_spin_path(spin), remote: true, class: 'edit generic'  %> 
 						<% else %>
-								<%= link_to '<i class="icon-flag"></i>Report Spin'.html_safe, new_report_path(:reported_id => spin.id, :type => "ReportSpin"), remote: true, class: 'report generic' %>
+								<%= link_to '<i class="icon-flag"></i>Report Spin'.html_safe, new_report_path(:reported_id => spin.id, :type => "ReportSpin"), remote: true, class: 'report generic' if signed_in? %>
 								<%= render 'shared/respin_link', object: spin if signed_in? %>
 						<% end %>
 						<% if spin.type %>	

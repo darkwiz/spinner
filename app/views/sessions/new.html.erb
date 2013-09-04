@@ -1,27 +1,8 @@
+<% provide(:title, t('.sign_in') ) %>
 <% content_for :center do %>
-<% provide(:title, "Sign in") %>
 <div class="row">
 	<div class="span6 offset3">
-		<h1>Sign in</h1>
-
-		<%= form_for(:session, url: sessions_path) do |f| %>
-
-		<%= f.label :email %>
-		<%= f.text_field :email %>
-
-		<%= f.label :password %>
-		<%= f.password_field :password %>
-
-
-        <p><%= link_to "forgotten password?", new_password_reset_path %></p>
-        <div class="field">
-        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-        <%= label_tag :remember_me %>
-        </div>
-        
-		<%= f.submit "Sign in", class: "btn btn-primary" %>
-		<% end %>
-
+		<%= render 'shared/login_fields' %>
 	</div>
 </div>
 

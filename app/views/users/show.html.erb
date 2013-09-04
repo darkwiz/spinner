@@ -11,7 +11,7 @@
     <section>
     <% if allowing?(@user) %>
       <div class="row-fluid">
-     <h5><%= "#{@user.username}" %>'s pictures</h5>
+     <h5><%= t( 'users.show.pic_username' , username: @user.name) %></h5>
         <ul class="thumbnails">
         <% @multispins[0..9].each_with_index do |img, index| %>  
           <li class="span4">
@@ -33,17 +33,16 @@
 <%= render 'shared/user_profile_card' %>  
 <div class="span8 well">
    <% unless allowing?(@user) %>
-    <h5><%= "#{@user.username}" %>'s spins are protected and just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.
+    <h5><%= t( 'users.show.not_visible' , username: @user.name) %></h5>
     <% else %>
-    </h5>
     <% if @user.spins.any? %>
-      <h3>Spins (<%= @user.spins.count %>)</h3>
+      <h3>Spins</h3>
       <ol class="spins">
         <%= render @spins %>
       </ol>
         <%= paginate @spins %>
     <% else %>
- <h5>No spins here!</h5>
+        <h5><%= h('.no_spins') %></h5>
     <% end %>
   <% end %>
 

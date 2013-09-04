@@ -9,9 +9,20 @@ en:
       contact: "Contact"
       about: "About"
       creator: "by Matteo Gentile"
+      lang: "Language:"
+    navbar:
+      help: "Help"
+      users: "Users"
+      account: "Account"
+      settings: "Settings"
+      profile: "Profile"
+      sign_out: "Sign Out"
+      search: "Search"
   spinner:
     home_base:
       title: "Welcome"
+      sign_up: "Or Sign up"
+      create_account: "Create Account"
     home_logged:
       title: "Your Home Page"
   spins:
@@ -20,7 +31,32 @@ en:
       posted: "Spinned"
   users:
     show:
-      user_home: "Home Page"
+      user_home: "Profile"
+      pic_username: '%{username}''s pictures'
+      no_spins: "No spins here!"
+      not_visible: '%{username}''s spins are protected and just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.'
+    new:
+      sign_up: "Sign Up"
+      create_account: "Create Account"
+  sessions:
+    new:
+      sign_in: "Sign In"
+  shared:
+    login_fields: 
+      sign_in: "Sign In"
+      forgotten_password: "Forgotten Password?"
+      remember_me: "Remember me"
+    spin_form:
+      spin: "Spin It!"
+      compose_spin: "Compose new spin..."
+    form_fields:
+      name: "Name"
+      username: "Username"
+      confirm_password: "Password Confirmation"
+      private_profile: "Check if you desire a private profile"
+    timeline_item:
+      posted: "Spinned"
+      ago: "ago"
 
   date:
     abbr_day_names:
@@ -230,5 +266,5 @@ en:
     errors:
       <<: *errors
   activerecord:
-    errors:
-      <<: *errors
+    models:
+      user: "User"

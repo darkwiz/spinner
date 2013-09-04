@@ -6,7 +6,10 @@
     <ul>
       <li><a href="#"><%= t('.about') %></a></li>
       <li><a href="#"><%= t('.contact') %></a></li>
-      <li><a href="#">Fake</a></li>
+      <li><a href="#"><%= t('.lang') %></a></li>
+      <li><%= button_to 'it', root_path(:set_locale => 'it'), :method => :post, class: "btn-link locale", :form_class => "locale" %></li>
+      <li>/</li>
+      <li><%= button_to 'en', root_path(:set_locale => 'en'), :method => :post, class: "btn-link locale", :form_class => "locale" %></li>
     </ul>
   </nav>
 </footer>

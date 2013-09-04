@@ -6,9 +6,20 @@ it:
       contact: "Contatti"
       about: "Su Di Noi"
       creator: "di Matteo Gentile"
+      lang: "Lingua:"
+    navbar:
+      help: "Aiuto"
+      users: "Utenti"
+      account: "Account"
+      settings: "Impostazioni"
+      profile: "Profilo"
+      sign_out: "Esci"
+      search: "Cerca"
   spinner:
     home_base: 
       title: "Benvenuto"
+      sign_up: "O Registrati"
+      create_account: "Crea Account"
     home_logged:
       title: "La Tua Home"
   spins:
@@ -17,7 +28,32 @@ it:
       ago: "fa"
   users:
     show:
-      user_home: "La tua Home"
+      user_home: "Profilo"
+      pic_username: 'Le immagini di %{username}'
+      no_spins: "L'utente ancora non ha pubblicato nulla."
+      not_visible: '%{username}''s spins are protected and just confirmed followers can see his complete profile. Click on the follow button to send him a follow request.'
+    new:
+      sign_up: "Registrati"
+      create_account: "Crea Account"
+  sessions:
+    new:
+      sign_in: "Accedi"
+  shared:
+    login_fields: 
+      sign_in: "Accedi"
+      forgotten_password: "Password Dimenticata?"
+      remember_me: "Ricordami"
+    spin_form:
+      spin: "Crea Spin"
+      compose_spin: "Componi un nuovo spin..."
+    form_fields:
+      name: "Nome"
+      username: "Id Utente"
+      confirm_password: "Conferma Password"
+      private_profile: "Spunta la casella se desideri un profilo privato"
+    timeline_item:
+      posted: "Condiviso"
+      ago: "fa"
 
   date:
     abbr_day_names:
@@ -221,5 +257,5 @@ it:
     errors:
       <<: *errors
   activerecord:
-    errors:
-      <<: *errors
+    models:
+      user: "Utente"

@@ -1,11 +1,11 @@
 <% if signed_in? %>
 <ul class="nav">
 	<li class="divider-vertical"></li>
-	<li><%= link_to "Users", users_path %></li>
+	<li><%= link_to t('.users'), users_path %></li>
 	<li class="divider-vertical"></li>
 	<%= form_tag  users_path , :method => 'get', :id => "users_search", :class => "navbar-search form-search offset2" do %>
 	<div class="input-append">
-		<%= text_field_tag :search, params[:name], data: { provide: 'typeahead', source: autocomplete_tag_name_tags_path }, :class => "span3 search-query", :placeholder => "Search", :autocomplete => "off" %>
+		<%= text_field_tag :search, params[:name], data: { provide: 'typeahead', source: autocomplete_tag_name_tags_path }, :class => "span3 search-query", :placeholder => t('.search'), :autocomplete => "off" %>
 		<%= button_tag(type: "submit", class: "btn btn-small") do %>
 		<i class="icon-search"></i>
 		<% end %>
@@ -22,14 +22,14 @@
 	<li class="divider-vertical"></li>
 	<li id="fat-menu" class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			Account <b class="caret"></b>
+			<%= t('.account') %> <b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu pull-right">
-			<li><%= link_to "Profile", current_user %></li>
-			<li><%= link_to "Settings", edit_user_path(current_user) %></li>
+			<li><%= link_to t('.profile'), current_user %></li>
+			<li><%= link_to t('.settings'), edit_user_path(current_user) %></li>
 			<li class="divider"></li>
 			<li>
-				<%= link_to "Sign out", signout_path, method: "delete" %>
+				<%= link_to t('.sign_out'), signout_path, method: "delete" %>
 			</li>
 		</ul>
 	</li>
@@ -39,7 +39,7 @@
 <% else %>
 
 <ul class="nav pull-right">
-	<li><%= link_to "Help", help_path %></li>
+	<li><%= link_to t('.help'), help_path %></li>
 </ul>
 
 <% end %>

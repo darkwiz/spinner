@@ -10,8 +10,6 @@ class ReportsController < ApplicationController
 	end
 
 	def create	
-		# target_reported = Report.new(params[:report])
-		# ok = current_user.reports << taget_reported
 		taget_reported = Report.factory(params[:type], params[:report])
 		ok = current_user.reports << taget_reported
 		respond_to do |format| 

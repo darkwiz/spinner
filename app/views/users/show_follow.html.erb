@@ -4,10 +4,11 @@
   <%= render 'shared/side_nav_stacked' %>
 </div>
 
+
 <%- end -%>
 <%- content_for :body do -%>
 <%= render 'shared/user_profile_card' %>   
-<div class="span8">
+<div class="span8 pull-right" >
     <h3><%= @title %></h3>
     <% if @users.any? %>
       <ul class="users">
