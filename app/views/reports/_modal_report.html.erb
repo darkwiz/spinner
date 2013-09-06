@@ -5,7 +5,7 @@
     <h3 class="modal-title">Report <%= h(object.class.name) %></h3>
   </div>
   <div class='modal-body'>
-        <% if object.class.name == "Spin" %>
+        <% if object.class.name == "Spin" || object.class.name == "Multispin" %>
           <div><%= f.hidden_field :reported_spin_id , :value => object.id %></div>
         <% elsif object.class.name == "User" %>
           <div><%= f.hidden_field :reported_user_id , :value => object.id %></div>

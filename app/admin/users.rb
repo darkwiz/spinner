@@ -52,10 +52,10 @@ index do
         row :banned
         row :confirmed_user
         panel "Reports" do
-			table_for user.reports do |t|  
-				t.column("Id") { |report| report.id }
-		 		t.column("Content") { |report| report.content }
-        t.column("Reported by") { |report| report.reported_by.name }
+			table_for user.report_users do |t|  
+				t.column("Id") { |report_user| report_user.id }
+		 		t.column("Content") { |reported_user| reported_user.content }
+        t.column("Reported by") { |report_user| report_user.reported_by.name }
 		 	end
 	 	end
       end

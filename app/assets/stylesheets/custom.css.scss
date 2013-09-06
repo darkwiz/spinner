@@ -148,12 +148,15 @@ input {
   @extend .error;
 }
 
+/* modal forms style */
+
 .modal-body{
   input, textarea, select, .uneditable-input{
     height : 100px;
   }
 }
-#new_spin_ajax{
+
+.modal form{
   margin: 0;
 }
 

@@ -1,9 +1,14 @@
 var DisplayImage =
 {
-	modal: undefined,
-
-	init: function()
+	
+	init: function(settings)
 	{
+		DisplayImage.config = {
+			$modal: undefined
+		};
+
+		$.extend( DisplayImage.config, settings );
+
 		DisplayImage.prepareModal();
 		$('body').on('click', '.image', DisplayImage.showFullSize);
 	},
@@ -11,27 +16,27 @@ var DisplayImage =
 	prepareModal: function()
 	{
 		$('body').append('<div class="image-modal modal hide fade">');
-		DisplayImage.modal = $('.image-modal');
-		DisplayImage.modal.hide(0);
+		DisplayImage.config.$modal = $('.image-modal');
+		DisplayImage.config.$modal.hide(0);
 
-		DisplayImage.modal.append('<img class="modal-image">');
-		DisplayImage.modal.prop('_img', DisplayImage.modal.children('img'));
-		DisplayImage.modal.prop('_img').addClass('img-polaroid');
-		DisplayImage.modal.prop('_img').css('margin', '5%');
-		DisplayImage.modal.prop('_img').css('width', '90%');
-		DisplayImage.modal.prop('_img').css('height', '90%');
+		DisplayImage.config.$modal.append('<img class="modal-image">');
+		DisplayImage.config.$modal.data('pic', DisplayImage.config.$modal.children('img'));
+		DisplayImage.config.$modal.data('pic').addClass('img-polaroid');
+		DisplayImage.config.$modal.data('pic').css('margin', '5%');
+		DisplayImage.config.$modal.data('pic').css('width', '90%');
+		DisplayImage.config.$modal.data('pic').css('height', '90%');
 	},
 
 	showFullSize: function(event)
 	{
 		event.preventDefault();
 		link = $(this).data('big');
-		if(DisplayImage.modal == undefined)
+		if(DisplayImage.config.$modal == undefined)
 		{
 			DisplayImage.prepareModal();
 		}
-		DisplayImage.modal.prop('_img').attr('src', link);
-		DisplayImage.modal.modal('show');
+		DisplayImage.config.$modal.data('pic').attr('src', link);
+		DisplayImage.config.$modal.modal('show');
 	},
 
 };
