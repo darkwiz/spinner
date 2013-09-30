@@ -5,9 +5,10 @@ def autocomplete_tag_name
       else
          tags = User.all
       end
-         result = tags.collect do |t|
-          { id: t.id, name: t.name }
-          end
-      render json: result
+       #   result = tags.collect do |t|
+       #   { id: t.id, name: t.name }
+       #  end
+       #  render json: result
+       render json: tags 
    end
 end

@@ -10,16 +10,15 @@ class CommentsController < ApplicationController
 			format.html { redirect_to root_url }
 			#format.js
 		end 
-end
-
-
-def destroy
-		#the spin was put into @spin by the before filter spin_owner
-		@comment.destroy
-		redirect_to root_url
 	end
 
-end
+
+	def destroy
+			@comment.destroy
+			redirect_to :back
+	end
+
+
 
 private
 	
@@ -29,4 +28,5 @@ private
         rescue
         	redirect_to(root_url) if @comment.nil?
         end
+    end
 end

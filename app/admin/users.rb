@@ -6,8 +6,13 @@ ActiveAdmin.register User do
 # end
 
 member_action :ban, :method => :put do
-    User.find(params[:id]).toggle!(:banned)
-    redirect_to [:admin, resource], :notice => "User banned!"
+    user = User.find(params[:id])
+    user.toggle!(:banned)
+    if user.banned?
+      redirect_to collection_path, :notice => "User banned!"
+    else
+      redirect_to collection_path, :notice => "Ban Removed!"
+    end
   end
 
 index do
@@ -23,7 +28,7 @@ index do
     end
     column "Sign Up Date", :created_at
     column "# of reports" do |user|
-      	user.reports.count
+      	user.report_users.count
     end
     actions defaults: true do |user|
       link_to user.banned ? "Remove Ban" : "Ban", ban_admin_user_path(user), :method => :put

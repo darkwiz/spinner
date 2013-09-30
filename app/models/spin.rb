@@ -4,7 +4,7 @@ class Spin < ActiveRecord::Base
   has_many :respins
   has_many :respinners, through: :respins, source: :respinner
   has_many :comments, dependent: :destroy
-  has_many :reports, foreign_key: "reported_spin_id"
+  has_many :reports, foreign_key: "reported_spin_id", dependent: :destroy
   validates :content, presence: true, length: { maximum: 140 }
   validates :user_id, presence: true
  

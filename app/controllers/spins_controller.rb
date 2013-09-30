@@ -53,10 +53,7 @@ class SpinsController < ApplicationController
 
 def destroy
 		@spin.destroy
-		respond_to do |format|
-			format.html { redirect_to :back }
-			format.js { render :nothing => true }
-		end
+		redirect_to :back
 end
 
 	

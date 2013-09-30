@@ -49,14 +49,15 @@ $(function() {
 	});
 });
 
-// Spin delete 
+/* Spin delete 
 
 $(function() {
-    $('.delete_post').on('ajax:success', function() {  
+    $('.delete_post').on('ajax:success', function() { 
         $(this).closest('li').parents('.accordion').fadeOut();  
     });  
 });
 
+*/
 
 /*
 

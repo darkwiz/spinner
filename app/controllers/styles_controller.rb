@@ -1,11 +1,10 @@
 class StylesController < ApplicationController
   before_filter :image_list, except: :show
-  #caches_page :show
 
   def show
     @style = Style.find(params[:id])
     respond_to do |format|
-      format.css #{ render :text => @style.well_color, :content_type => "text/css" }
+      format.css 
     end
   end
 

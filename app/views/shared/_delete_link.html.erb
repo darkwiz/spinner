@@ -1,4 +1,4 @@
 <% if current_user?(object.user) %>
-   <%= link_to '<i class="icon-trash"></i>Delete'.html_safe, object, :remote => true, :class => 'delete_post generic', :method => :delete, data: { confirm: "Are you sure?" } %>
+   <%= link_to '<i class="icon-trash"></i>Delete'.html_safe, object, :class => 'delete_post generic', :method => :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
 

@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "Recent Reported Comments" do
-          table_for ReportComment.where('created_at < ? and created_at > ?', Time.now, 1.week.ago) do |r|
+          table_for ReportComment.where('created_at < ? and created_at > ?', Time.now, 6.week.ago) do |r|
            column :id
            r.column("Reported by") { |report| link_to report.user.name , [:admin, report.user] }
            r.column("Reported Comment") { |report| link_to report.comment.id, [:admin, report.comment] }
@@ -17,7 +17,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
        panel "Recent Reported Spins" do
-        table_for ReportSpin.where('created_at < ? and created_at > ?', Time.now, 1.week.ago) do |r|
+        table_for ReportSpin.where('created_at < ? and created_at > ?', Time.now, 6.week.ago) do |r|
          column :id
          r.column("Reported by") { |report| link_to report.user.name , [:admin, report.user] }
          r.column("Reported Spin") { |report| link_to report.spin.id, [:admin, report.spin] }
@@ -28,7 +28,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
        panel "Recent Reported Users" do
-        table_for ReportUser.where('created_at < ? and created_at > ?', Time.now, 1.week.ago) do |r|
+        table_for ReportUser.where('created_at < ? and created_at > ?', Time.now, 6.week.ago) do |r|
          column :id
          r.column("Reported by") { |report| link_to report.reported_by.name , [:admin, report.reported_by] }
          r.column("Reported User") { |report| link_to report.user.name, [:admin, report.user] }
